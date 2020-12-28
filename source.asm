@@ -124,41 +124,7 @@
 	
 	
 	
-	                       
-	; SNAKE2_HEADSHAPE_UP    DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 119, 119, 141, 46, 46, 116, 117, 119, 189, 16, 16, 0, 0, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 16, 17, 118, 46, 46, 46, 46, 46, 117, 119, 190, 16, 0, 0, 0, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 18, 238, 117, 140, 116, 46, 46, 140, 116, 46, 117, 144, 17, 16, 0, 0, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 24, 164, 47, 141, 6, 116, 116, 6, 117, 142, 117, 23, 23, 16, 16, 0, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 0, 0, 16, 16, 22, 29, 141, 143, 143, 115, 4, 4, 114, 118, 118, 118, 165, 29, 20, 16, 0, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 0, 16, 16, 216, 28, 28, 144, 118, 188, 113, 4, 4, 112, 186, 189, 119, 143, 30, 26, 17, 16, 0, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 16, 16, 192 ,143, 30, 27, 212, 185, 112, 112, 4, 4, 112, 112, 112, 186, 144, 29, 29, 216, 16, 16, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 0, 16, 192, 120, 168, 29, 26, 111, 112, 112, 112, 112, 112, 112, 112, 112, 112, 136, 28, 29, 144, 16, 16, 0, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 16, 16, 193, 120, 144, 22, 22, 208, 112, 112, 112, 112, 112, 112, 112, 112, 186, 213, 22, 24, 144, 193, 16, 16, 0, 0, 0
-	;                        DB  0, 0, 16, 16, 16, 193, 121, 121, 121, 120, 121, 191, 186, 112, 112, 112, 112, 112, 186, 191, 121, 121, 121, 121, 121, 120, 192, 16, 16, 0, 0
-	;                        DB  0, 0, 16, 192, 121, 119, 119, 119, 119, 119, 119, 121, 120, 186, 112, 112, 112, 186, 120, 121, 121, 119, 119, 119, 119, 121, 121, 192, 16, 16, 0
-	;                        DB  0, 16, 16, 119, 119, 119, 118, 119, 191, 119, 119, 119, 121, 119, 186, 112, 186, 191, 121, 119, 119, 119, 191, 119, 119, 119, 119, 121, 192, 16, 0
-	;                        DB  0, 16, 191, 119, 118, 118, 119, 16, 16, 191, 118, 119, 119, 121, 121, 191,120, 121, 119, 119, 118, 191, 16, 16, 119, 118, 119, 119, 193, 16, 0
-	;                        DB  0, 16, 191, 119, 118, 143, 191, 16, 16, 119, 143, 118, 119, 119, 121, 121, 121, 121, 119, 118, 143, 119, 16, 16,191, 118, 118, 119, 193, 16, 0
-	;                        DB  0, 16, 193, 119, 143, 117, 190, 16, 215, 117, 117, 118, 118, 119, 121, 121, 121, 119, 119, 118, 117, 142, 215, 16, 190, 143, 118, 119, 193, 16, 16
-	;                        DB  16, 16, 120, 119, 118, 142, 141, 141, 46, 46, 142, 143, 118, 119, 121, 120, 121, 119, 118, 2, 142, 46, 46, 141, 117, 142, 118, 119, 121, 192, 16
-	;                        DB  16, 192, 121, 118, 116, 116, 46, 46 ,46, 141, 142, 118, 118, 119, 121, 121, 121, 119, 118, 118, 142, 141, 46, 46, 141, 117, 116, 117, 121, 193, 16
-	;                        DB  16, 193, 119, 116, 43, 45, 45, 117, 117, 46, 46, 116, 116, 116, 121, 121, 121, 117, 116, 116, 116, 46, 117, 117, 45, 45, 43, 116, 119, 191, 16
-	;                        DB  16, 191, 118, 116, 45, 44, 45, 186, 186, 45, 44, 45, 43, 116, 121, 120, 121, 116, 43, 45, 44, 44, 187, 17, 43, 44, 45, 6, 118, 119, 16
-	;                        DB  16, 191, 118, 116, 45, 44, 116, 16, 16, 6, 44, 45, 43, 116, 121, 121, 121, 117, 43, 45, 44, 45, 17, 16, 116, 44, 45, 6, 118, 119, 16
-	;                        DB  16, 191, 118, 116, 43, 44, 116, 16, 16, 6, 44, 45, 43, 117, 121, 121, 121, 117, 43, 45, 44, 45, 17, 16, 116, 44, 45, 6, 118, 119, 16
-	;                        DB  16, 191, 119, 117, 6, 69, 28, 17, 18, 45, 44, 45, 116, 118, 119, 119, 119, 119, 116, 43, 45, 45, 187, 17, 27, 69, 43, 116, 119, 191, 16
-	;                        DB  16, 16, 119, 119, 118, 164, 70, 117, 115, 45, 43, 117, 119, 119, 119, 118 ,119, 119, 119, 117, 116, 45, 116, 188, 70, 26, 117, 119, 119, 191, 16
-	;                        DB  0, 16, 190, 118, 119, 119, 117, 116, 116, 117, 118, 119, 119, 119, 118, 118, 118, 119, 118, 119, 118, 117, 116, 116 ,117, 118, 119, 118, 118, 16, 16
-	;                        DB  0, 16, 17, 143, 118, 121, 119, 143, 117, 118, 121, 119, 118, 118, 143, 143, 118, 119, 118, 118, 121, 119, 143, 117, 118, 121, 119, 143, 190, 16, 0
-	;                        DB  0, 0, 16, 118, 142, 119, 119, 143, 117, 118, 119, 143, 118, 118, 117, 142, 143, 118, 118, 117, 118, 118, 143, 117, 118, 119, 117, 118, 17, 16, 0
-	;                        DB  0, 0, 16, 17, 117, 141, 143, 141 ,46, 143, 117, 142, 118, 118, 142, 141, 142, 118, 119, 143, 141, 117, 141, 46, 143, 117, 141, 190, 16, 0, 0
-	;                        DB  0, 0, 0, 16, 215, 46, 46, 141, 141, 46, 46, 143, 119, 143, 141, 46, 141, 118, 119, 118, 141, 46, 141, 141, 46, 46, 118, 16, 16, 0, 0
-	;                        DB  0, 0, 0, 16, 17, 117, 46, 46, 46, 46, 141, 119, 119, 143, 46, 46, 141, 118, 119, 121, 117, 46, 46, 46, 46, 141, 191, 16, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 16, 191, 141, 46, 46, 46, 118, 193, 119, 143, 46, 46, 141, 118, 119, 193, 190, 46, 46, 46, 46, 189, 16, 16, 0, 0, 0
-	;                        DB  0, 0, 0, 0, 16, 16, 190, 117, 141, 118, 17, 16, 17, 191, 189, 118, 215, 191, 16, 16, 16, 118, 141, 141, 118, 16, 16, 0, 0, 0, 0
-
-
-
+	                    
 	SNAKE2_HEADSHAPE_UP    DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 118, 118, 118, 0, 118, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	                       DB  0, 118, 118, 117, 117, 118, 118, 118, 117, 117, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 118, 118, 6, 6, 117, 118, 117, 6
 	                       DB  6, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 118, 118, 118, 6, 41, 6, 116, 6, 41, 6, 118, 118, 118, 118, 0, 0, 0, 0
@@ -267,12 +233,42 @@
 	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 118, 118, 118, 0, 118, 118, 118, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	                       DB  0
 
+	APPLE                  DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 104, 46, 46, 46, 46, 46, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 0, 244, 0, 104, 46, 46, 46, 46, 46, 46, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 244, 137, 137, 136, 140, 46
+	                       DB  46, 46, 46, 46, 46, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 244, 137, 137, 136, 46, 46, 46, 46, 46, 46, 46, 116, 178, 0, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 244, 137, 136, 46, 46, 46, 46, 46, 46, 46, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 20, 20, 0, 0, 0, 137, 136, 46, 46, 46, 46, 46, 46, 140, 227, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 136, 136, 136, 136, 0, 0
+	                       DB  136, 137, 46, 46, 46, 46, 6, 136, 136, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 244, 0, 41, 39, 41, 41, 41, 41, 39, 39, 136, 138, 116, 41, 41, 39, 39, 39, 41
+	                       DB  39, 41, 0, 244, 0, 0, 0, 0, 0, 0, 0, 20, 136, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 6, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 136, 20, 0, 0, 0, 0
+	                       DB  0, 244, 136, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 136, 244, 0, 0, 0, 0, 124, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 41, 39, 39, 39, 39, 124, 0, 0, 0, 196, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 12, 64, 64, 12, 39, 39, 39, 41, 196, 0, 0, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 64, 65, 65, 64, 41, 39, 39
+	                       DB  39, 0, 0, 0, 124, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 12, 65, 65, 64, 12, 39, 39, 39, 124, 0, 0, 0, 41, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 12, 64, 65, 64, 41, 39, 39, 41, 0, 0, 244, 136, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 41, 12, 12, 12, 39, 39, 39, 41, 136, 244, 244, 136, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 41, 136, 244, 0, 0, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 0, 0, 0, 124
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 124, 0, 0, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 0, 0, 0, 3, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 41, 3, 0, 0, 196, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41
+	                       DB  196, 0, 0, 0, 123, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 123, 0, 0, 0, 0, 124, 41, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 124, 0, 0, 0, 0, 244, 136, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 136, 244, 0, 0, 0, 0, 0, 123, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 123, 0, 0, 0, 0, 0, 0, 0, 123, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 123, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 244, 136, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 136, 244, 0, 0, 0, 0, 0, 0, 0, 0, 0, 196, 41, 39, 39, 39, 39, 39
+	                       DB  39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 41, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 196, 41, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39
+	                       DB  39, 39, 41, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 136, 39, 39, 39, 39, 39, 41, 39, 41, 39, 39, 39, 39, 39, 136, 20, 0, 0, 0, 0, 0, 0
+	                       DB  0
+
+	APPLE_X                DW  236,103,	353,211,53,	442,546,490,501,257,404,68,	417,169,252,329,292,197,43,	344,481,514,313,554,484,261,524,312,544,260
+	APPLE_Y                DW  332,254,103,256,189,212,133,175,81,256,117,352,287,240,339,308,290,313,353,281,89,312,114,122,288,324,124,127,198,114
+	APPPLES_NUM            DW  30                                                                                                                                                                                 	; 30 POSSIBLE LOCATIONS FOR APPLES
+	CURR_APPLE_INDEX       DW  0                                                                                                                                                                                  	; THAT REPRESENT WHICH APPLE IS DISPLAYED CURRENLTY
+	CRITICAL_DIST          DW  32                                                                                                                                                                                 	; SNAKE EATS AN APPLE IF THE DISTANCE BETWEEN SNAKE_HEAD_CENTER AND APPLE_CENTER IS 22
 
 
 
-	
 
-	SNAKE_LEN_ARR          DW  5,5
+	SNAKE_LEN_ARR          DW  2,2
 	CHOSEN_SNAKE           DW  ?
 	;DATA ABOUT SNAKE SHAPE
 
@@ -362,12 +358,12 @@
 	INIT_SQUARE_Y          DW  ?
 	INIT_SQUARE_TRAN_X     DW  ?
 	INIT_SQUARE_TRAN_Y     DW  ?
-	TEMP_COLOR             DW  ?
+	TEMP_COLOR             DB  ?
 	
 
-
-
-
+	TEMP_BUFFER1           DB  ?
+	TEMP_BUFFER2           DB  ?
+TEMP_BOOL    DB 0
 .CODE
 MAIN PROC FAR
 	                          MOV  AX,@DATA
@@ -381,7 +377,7 @@ MAIN PROC FAR
 
 
 	                          MOV  CX,640
-	LLPP:                     
+	LLPP:
 	                          MOV  AH,0Ch
 	                          MOV  AL,05
 	                          MOV  BH,0
@@ -389,7 +385,7 @@ MAIN PROC FAR
 	                          INT  10h
 	                          LOOP LLPP
 
-
+	                    
 	                
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	                          CALL DRAW_INIT_SNAKE
@@ -434,7 +430,7 @@ DRAW_HEAD proc  NEAR
 	                          RET
 DRAW_HEAD ENDP
 
-DRAW_SQUARE PROC NEAR
+DRAW_BODY PROC NEAR
 
 	                          MOV  CX,INIT_SQUARE_X                       	;set the initial column (X)
 	                          MOV  DX,INIT_SQUARE_Y
@@ -444,7 +440,7 @@ DRAW_SQUARE PROC NEAR
 	                          MOV  INIT_SQUARE_TRAN_X,CX
 	                          MOV  INIT_SQUARE_TRAN_Y,DX
 	
-	DRAW_SQUARE_HORIZONTALL:  
+	DRAW_BODY_HORIZONTALL:    
 	                          MOV  AH,0Ch                                 	;set the configuration to writing a pixel
 	                          MOV  AL,[SI]
 	                          MOV  AH,0Ch                                 	;choose CORRECT color
@@ -453,6 +449,69 @@ DRAW_SQUARE PROC NEAR
 			
 	                          INC  SI                                     	; GET THE NEXT COLOR
 
+	                          INC  CX                                     	;CX = CX + 1
+	                          MOV  AX,CX                                  	;CX - BALL_X > BALL_SIZE (Y -> We go to the next line,N -> We continue to the next column
+	                          SUB  AX,INIT_SQUARE_TRAN_X
+	                          CMP  AX,SQUARE_SIZE
+	                          JNE  DRAW_BODY_HORIZONTALL
+			
+	                          MOV  CX,INIT_SQUARE_TRAN_X                  	;the CX register goes back to the initial column
+	                          INC  DX                                     	;we advance one line
+			
+	                          MOV  AX,DX                                  	;DX - BALL_Y > BALL_SIZE (Y -> we exit this procedure,N -> we continue to the next line
+	                          SUB  AX,INIT_SQUARE_TRAN_Y
+	                          CMP  AX,SQUARE_SIZE
+	                          JNE  DRAW_BODY_HORIZONTALL
+							
+	                          RET
+DRAW_BODY ENDP
+
+DRAW_APPLE PROC NEAR
+
+	;;;;;;;;;;;;;;;;VALIDATION
+
+	                          MOV  AX,APPPLES_NUM
+	                          MOV  BX,2
+	                          MUL  BX
+	                          SUB  AX,4                                   	; TRIVIAL NUMBER => STOP BEFORE END
+	                          CMP  CURR_APPLE_INDEX,AX
+	                          JB   NOT_END_OF_APPLES_ARR
+	                          MOV  CURR_APPLE_INDEX,0
+	NOT_END_OF_APPLES_ARR:    
+	                          MOV  SI,OFFSET APPLE_X
+	                          MOV  BX, CURR_APPLE_INDEX
+	                          MOV  DX, [SI+BX]
+	                          MOV  TEMP_HEAD_X ,DX
+
+	                          MOV  SI,OFFSET APPLE_Y
+	                          MOV  BX, CURR_APPLE_INDEX
+	                          MOV  DX, [SI+BX]
+	                          MOV  TEMP_HEAD_Y ,DX
+			 
+	                          MOV  TEMPHEAD, OFFSET APPLE
+	                          CALL DRAW_HEAD
+
+	                          RET
+DRAW_APPLE ENDP
+
+DRAW_SQUARE PROC NEAR                                                 		; GIVE IT INITIAL_SQUARE_X, AND INITIAL_SQUARE_Y AND TEMP_COLOR
+
+	                          MOV  CX,INIT_SQUARE_X                       	;set the initial column (X)
+	                          MOV  DX,INIT_SQUARE_Y
+	                                   
+	                          SUB  CX,15
+	                          SUB  DX,15
+	                          MOV  INIT_SQUARE_TRAN_X,CX
+	                          MOV  INIT_SQUARE_TRAN_Y,DX
+	
+	DRAW_SQUARE_HORIZONTALL:  
+	;set the configuration to writing a pixel
+	                          MOV  AL,TEMP_COLOR
+	                          MOV  AH,0Ch                                 	;choose CORRECT color
+	                          MOV  BH,00h                                 	;set the page number
+	                          INT  10h                                    	;execute the configuration
+			
+	; GET THE NEXT COLOR
 	                          INC  CX                                     	;CX = CX + 1
 	                          MOV  AX,CX                                  	;CX - BALL_X > BALL_SIZE (Y -> We go to the next line,N -> We continue to the next column
 	                          SUB  AX,INIT_SQUARE_TRAN_X
@@ -469,6 +528,7 @@ DRAW_SQUARE PROC NEAR
 							
 	                          RET
 DRAW_SQUARE ENDP
+
  
 DRAW_INIT_SNAKE PROC NEAR
  
@@ -491,7 +551,7 @@ DRAW_INIT_SNAKE PROC NEAR
 	                          ADD  DX,31
 	                          MOV  SNAKE1_Y[2],DX
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 								
 	                          
 
@@ -515,7 +575,7 @@ DRAW_INIT_SNAKE PROC NEAR
 	                          ADD  DX,31
 	                          MOV  SNAKE2_Y[2],DX
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 
 
 
@@ -586,7 +646,7 @@ DELETE_END PROC NEAR
 	                          MUL  BX
 	                          MOV  DI,AX
 	                          MOV  BX,SNAKE_LEN_ARR[DI]
-	                           SUB  BX,1
+	                          SUB  BX,1
 	                          MOV  AX , BX
 	                          MOV  BX , 2
 	                          MUL  BX
@@ -619,7 +679,7 @@ SHIFT_SNAKE PROC NEAR
 	SHIFT_SNAKE_ONE:          
 	                          MOV  CX,SNAKE_LEN_ARR[SI]
 	                          MOV  BX,CX
-	;MOV  DX , CX
+
 	                          MOV  DI,OFFSET SNAKE1_X
 	                          MOV  SI,OFFSET SNAKE1_Y
 	L1:                       
@@ -668,7 +728,7 @@ MOVE_SNAKE1_UP PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE1_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 
 
 	EXITUP1:                  
@@ -703,7 +763,7 @@ MOVE_SNAKE1_DOWN PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE1_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_DOWN1:               
 	                          RET
 
@@ -739,7 +799,7 @@ MOVE_SNAKE1_RIGHT PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE1_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_RIGHT1:              
 	                          RET
 
@@ -772,7 +832,7 @@ MOVE_SNAKE1_LEFT PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE1_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_LEFT1:               
 	                          RET
 	
@@ -781,9 +841,10 @@ MOVE_SNAKE1_LEFT ENDP
 
 
 MOVE_SNAKE2_UP PROC NEAR
+	                          MOV  CHOSEN_SNAKE , 2
 	                          CMP  SNAKE2_Y[0] ,98
 	                          JBE  EXITUP2
-	                          MOV  CHOSEN_SNAKE , 2
+	                          
 	                          CALL DELETE_END
 	                     
 							  
@@ -809,7 +870,7 @@ MOVE_SNAKE2_UP PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE2_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 
 
 	EXITUP2:                  
@@ -822,9 +883,10 @@ MOVE_SNAKE2_UP ENDP
 
 
 MOVE_SNAKE2_DOWN PROC NEAR
+	                          MOV  CHOSEN_SNAKE , 2
 	                          CMP  SNAKE2_Y[0] ,352
 	                          JAE  EXIT_DOWN2
-	                          MOV  CHOSEN_SNAKE , 2
+	                         
 	                          CALL DELETE_END
 	                          MOV  TEMPHEAD, OFFSET SNAKE2_HEADSHAPE_DOWN
 	                          MOV  DX,SNAKE2_X[0]
@@ -844,7 +906,7 @@ MOVE_SNAKE2_DOWN PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE2_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_DOWN2:               
 	                          RET
 
@@ -855,9 +917,10 @@ MOVE_SNAKE2_DOWN ENDP
 
 
 MOVE_SNAKE2_RIGHT PROC NEAR
+	                          MOV  CHOSEN_SNAKE , 2
 	                          CMP  SNAKE2_X[0] , 592
 	                          JAE  EXIT_RIGHT2
-	                          MOV  CHOSEN_SNAKE , 2
+	                          
 	                          CALL DELETE_END
 							
 	                          MOV  TEMPHEAD, OFFSET SNAKE2_HEADSHAPE_RIGHT
@@ -880,7 +943,7 @@ MOVE_SNAKE2_RIGHT PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE2_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_RIGHT2:              
 	                          RET
 
@@ -888,9 +951,10 @@ MOVE_SNAKE2_RIGHT ENDP
 
 
 MOVE_SNAKE2_LEFT PROC NEAR
+	                          MOV  CHOSEN_SNAKE , 2
 	                          CMP  SNAKE2_X[0],48
 	                          JBE  EXIT_LEFT2
-	                          MOV  CHOSEN_SNAKE , 2
+	                         
 	                          CALL DELETE_END
 							
 	                          MOV  TEMPHEAD, OFFSET SNAKE2_HEADSHAPE_LEFT
@@ -913,20 +977,145 @@ MOVE_SNAKE2_LEFT PROC NEAR
 	                          MOV  INIT_SQUARE_X,DX
 	                          MOV  DX, SNAKE2_Y[2]
 	                          MOV  INIT_SQUARE_Y,DX
-	                          CALL DRAW_SQUARE
+	                          CALL DRAW_BODY
 	EXIT_LEFT2:               
 	                          RET
 	
 
 MOVE_SNAKE2_LEFT ENDP
 
+INCREASE_LEN PROC NEAR                                                		; TAKE CHOSEN_SNAKE,
+	                          CMP  CHOSEN_SNAKE,1
+	                          JZ   CHOSEN_SNAKE_IS_1
+	                          MOV  SI,OFFSET SNAKE2_X
+	                          MOV  DI,OFFSET SNAKE2_Y
+	                          ADD  SNAKE_LEN_ARR[2],1
+	                          JMP  END_OF_CHOOSING_THE_SNAKE
+	CHOSEN_SNAKE_IS_1:        
+	                          MOV  SI,OFFSET SNAKE1_X
+	                          MOV  DI,OFFSET SNAKE1_Y
+	                          ADD  SNAKE_LEN_ARR[0],1
+	END_OF_CHOOSING_THE_SNAKE:
+							
+
+							  
+
+
+
+	                          RET
+	                    INCREASE_LEN      ENDP
+
+CHECK_FOOD PROC NEAR
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  AX, [APPLE_X+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE1_X[0]                         	;   BX will INITIALLY contain the x-cordiante of the head of snake 1
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_X_CHECKING                  	; GE==GREATER EQUAL
+	                          XCHG AX,BX                                  	; IF BX IS LARGER THAN AX SO XCHG THEM
+	A_GE_B_FOR_X_CHECKING:    
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JG   END_OF_SNAKE1_FALSE                    	; CONDITION IS FALSE , RET
+
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  AX, [APPLE_Y+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE1_Y[0]
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_Y_CHECKING
+	                          XCHG AX,BX
+
+	A_GE_B_FOR_Y_CHECKING:    
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JBE  END_OF_SNAKE1_TRUE                     	; CONDITION IS TRUE
+
+	                          JMP  END_OF_SNAKE1_FALSE
+
+	END_OF_SNAKE1_TRUE:                                                   	; CONDITION IS TRUE
+	                          MOV  TEMP_COLOR,00h                         	; PREPARING FOR DELETING THE APPLE
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  DX,[APPLE_X+BX]
+	                          MOV  INIT_SQUARE_X,DX
+	                          MOV  DX,[APPLE_Y+BX]
+	                          MOV  INIT_SQUARE_Y,DX
+	                          CALL DRAW_SQUARE
+	                          ADD  CURR_APPLE_INDEX,2
+	                          MOV  CHOSEN_SNAKE,1
+	                          CALL INCREASE_LEN
+
+	                          JMP  ENDD
+
+
+	END_OF_SNAKE1_FALSE:      
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;THE 2ND SNAKE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  AX, [APPLE_X+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE2_X[0]                         	;   BX will INITIALLY contain the x-cordiante of the head of snake 1
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_X_CHECKING2                 	; GE==GREATER EQUAL
+	                          XCHG AX,BX                                  	; IF BX IS LARGER THAN AX SO XCHG THEM
+	A_GE_B_FOR_X_CHECKING2:   
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JG   ENDD                                   	; CONDITION IS FALSE , RET
+
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  AX, [APPLE_Y+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE2_Y[0]
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_Y_CHECKING2
+	                          XCHG AX,BX
+
+	A_GE_B_FOR_Y_CHECKING2:   
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JBE  END_OF_SNAKE2_TRUE2                    	; CONDITION IS TRUE
+
+	                          JMP  ENDD
+
+	END_OF_SNAKE2_TRUE2:                                                  	; CONDITION IS TRUE
+	                          MOV  TEMP_COLOR,00h                         	; PREPARING FOR DELETING THE APPLE
+	                          MOV  BX,CURR_APPLE_INDEX
+	                          MOV  DX,[APPLE_X+BX]
+	                          MOV  INIT_SQUARE_X,DX
+	                          MOV  DX,[APPLE_Y+BX]
+	                          MOV  INIT_SQUARE_Y,DX
+	                          CALL DRAW_SQUARE
+	                          ADD  CURR_APPLE_INDEX,2
+	                          MOV  CHOSEN_SNAKE,2
+	                          CALL INCREASE_LEN
+
+	                          JMP  ENDD
+							  
+							
+	ENDD:                     
+	                          RET
+CHECK_FOOD ENDP
+
+
 MOVE_SNAKE PROC NEAR
 
+	                    
 	START:                    
-	                          mov  ah,0
-	                          int  16h
+	                         CALL DRAW_APPLE
+	                          CALL CHECK_FOOD
+	                        
 	;NOW AL HAVE ASCII AND AH HAVE SCAN
-	;MOV AH,72
+	;MOV AH,72                
+	                       
+						      mov  ah,0
+	                          int  16h
+						CMP TEMP_BOOL,0
+						JZ SNAKE_TWO_MOVES
 	                          CMP  AH ,72
 	                          JZ   UP1
 	                          CMP  AH ,80
@@ -934,50 +1123,92 @@ MOVE_SNAKE PROC NEAR
 	                          CMP  AH,77
 	                          JZ   RIGHT1
 	                          CMP  AH,75
+	                          JZ   L_TEMP1
+	                          CMP  TEMP_BUFFER1 ,72
+	                          JZ   UP1
+	                          CMP  TEMP_BUFFER1 ,80
+	                          JZ   DOWN1
+	                          CMP  TEMP_BUFFER1,77
+	                          JZ   RIGHT1
+	                          CMP  TEMP_BUFFER1,75
 	                          JZ   LEFT1
-
+							
+	SNAKE_TWO_MOVES:          
 	                          CMP  AH ,11H
 	                          JZ   UP2
 	                          CMP  AH ,1FH
-	                          JZ   DOWN2
+	                          JZ   D_TEMP2
 	                          CMP  AH,20H
-	                          JZ   RIGHT2
+	                          JZ   R_TEMP2
 	                          CMP  AH,1EH
+	                          JZ   L_TEMP2
+	                          CMP  TEMP_BUFFER2 ,11H
+	                          JZ   UP2
+	                          CMP  TEMP_BUFFER2 ,1FH
+	                          JZ   DOWN2
+	                          CMP  TEMP_BUFFER2,20H
+	                          JZ   RIGHT2
+	                          CMP  TEMP_BUFFER2,1EH
 	                          JZ   LEFT2
 
+	                          JMP  START
 
-							  JMP START
+	L_TEMP1:                  
+	                          JMP  LEFT1
+	R_TEMP2:                  
+	                          JMP  RIGHT2
+	L_TEMP2:                  
+	                          JMP  LEFT2
+	D_TEMP2:                  
+	                          JMP  DOWN2
 
 	UP1:                      
+                     
 	                          CALL MOVE_SNAKE1_UP
+	                          MOV  TEMP_BUFFER1,72
+	                          MOV  TEMP_BOOL,0
 	                          JMP  START
 
 	DOWN1:                    
 	                          CALL MOVE_SNAKE1_DOWN
+	                          MOV  TEMP_BUFFER1,80
+	                          MOV  TEMP_BOOL,0
 	                          JMP  START
 
 	RIGHT1:                   
 	                          CALL MOVE_SNAKE1_RIGHT
+	                          MOV  TEMP_BUFFER1,77
+	                          MOV  TEMP_BOOL,0
 	                          JMP  START
 
 	LEFT1:                    
 	                          CALL MOVE_SNAKE1_LEFT
+	                          MOV  TEMP_BUFFER1,75
+	                          MOV  TEMP_BOOL,0
 	                          JMP  START
 
 	UP2:                      
 	                          CALL MOVE_SNAKE2_UP
+	                          MOV  TEMP_BUFFER2,11H
+	                          MOV  TEMP_BOOL,1
 	                          JMP  START
 
 	DOWN2:                    
 	                          CALL MOVE_SNAKE2_DOWN
+	                          MOV  TEMP_BUFFER2,1FH
+	                          MOV  TEMP_BOOL,1
 	                          JMP  START
 
 	RIGHT2:                   
 	                          CALL MOVE_SNAKE2_RIGHT
+	                          MOV  TEMP_BUFFER2,20H
+	                          MOV  TEMP_BOOL,1
 	                          JMP  START
 
 	LEFT2:                    
 	                          CALL MOVE_SNAKE2_LEFT
+	                          MOV  TEMP_BUFFER2,1EH
+	                          MOV  TEMP_BOOL,1
 	                          JMP  START
 							
 	                          RET
