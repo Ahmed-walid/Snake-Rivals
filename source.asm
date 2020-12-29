@@ -1155,7 +1155,6 @@ MOVE_SNAKE PROC NEAR
 	                          CMP  AH,75
 	                          JZ   LEFT1
 
-
 	                          CMP  AH ,11H
 	                          JZ   UP2
 	                          CMP  AH ,1FH
@@ -1164,6 +1163,9 @@ MOVE_SNAKE PROC NEAR
 	                          JZ   RIGHT2
 	                          CMP  AH,1EH
 	                          JZ   LEFT2
+
+
+							  JMP START
 
 	UP1:                      
 	                          CALL MOVE_SNAKE1_UP
