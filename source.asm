@@ -6,6 +6,14 @@
 	SQUARE_SIZE            DW  31
 
 	; DATA ABOUT FIRST SNAKE
+	ask_name               DB  "Please Enter First player Name:",10,13,'$'
+	name_s                 DB  15,?,15 dup('$')
+	ask_name2              DB  "Please Enter second player Name:",10,13,'$'
+	name_s2                DB  15,?,15 dup('$')
+	new_line               db  10,13
+	pressenterkey          db  "Press Enter Key To Continue",10,13,'$'
+	message                db  "*To start Chatting Press F1",10,13,10,13, '*To Start Snake Trivals Press F2',10,13,10,13,'*To End the Program press ESC',10,13,10,13,'$'
+	chat                   db  'now you start chatting$'
 	SNAKE1_COLOR           EQU 2                                                                                                                                                                                  	;GREEN
 	SNAKE1_X               DW  100 DUP(110)                                                                                                                                                                       	; INTITALLY
 	SNAKE1_Y               DW  100 DUP(110)                                                                                                                                                                       	; INTITALLY
@@ -370,10 +378,146 @@
 
 .CODE
 MAIN PROC FAR
-	                          MOV  AX,@DATA
-	                          MOV  DS,AX
+	         MOV AX,@DATA
+	         MOV DS,AX
 
-	; ENTER GRAPHICS MODE
+
+
+	         mov ds,ax
+	;clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	; text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,081fh
+	         int 10h
+	         mov ah,09
+	         mov dx ,offset ask_name
+	         int 21h
+	;set curser
+	         mov ah,2
+	         mov dx,091fh
+	         int 10h
+	;input his name
+	         mov ah,0ah
+	         mov dx,offset name_s+2
+	         int 21h
+	;;;;second player
+	         mov ah,2
+	         mov dx,0a1fh
+	         int 10h
+	         mov ah,09
+	         mov dx ,offset ask_name2
+	         int 21h
+	;set curser
+	         mov ah,2
+	         mov dx,0b1fh
+	         int 10h
+	;input his name
+	         mov ah,0ah
+	         mov dx,offset name_s2+2
+	         int 21h
+	;;;;;;;
+
+
+	;set curser
+	         mov ah,2
+	         mov dx,0c1fh
+	         int 10h
+	;out put of press any key to continue
+	         mov ah,09
+	         mov dx,offset pressenterkey
+	         int 21h
+	;wait for press key
+	label1:  mov ah,0
+	         int 16h
+	         cmp ah,28
+	         jnz label1
+
+	;to clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	;text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,0800h
+	         int 10h
+	;input in page 2
+	         mov ah,09
+	         mov dx,offset message
+	         int 21h
+	; to make zero flag not equal zero
+	         add ah,2
+	;wait for prees key
+	return:  mov ah,0
+	         int 16h
+
+	         cmp ah,59
+	         jz  Chatting
+
+	         cmp ah,1
+	         jz  exit
+
+	         cmp ah,60
+	         jz  startGame
+							  
+ 
+	         jnz return
+
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;for chatting not complete
+
+	chatting:
+	;to clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	;text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,0000h
+	         int 10h
+	         mov ah,09
+	         mov dx,offset chat
+	         int 21h
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+exit:
+.EXIT
+
+	                
+	
+
+	startGame:                                                            	; ENTER GRAPHICS MODE
+
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;
 	                          MOV  AL,02H
 	                          MOV  AH,4FH
 	                          MOV  Bx,0100H
@@ -389,15 +533,90 @@ MAIN PROC FAR
 	                          INT  10h
 	                          LOOP LLPP
 
+	;;;;;;;;;status bar
 
-	                
+
+	;;;;;;;;;;
+	;;;;;;;
+	;;;;;;;;;;;
+
+        
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	                          CALL DRAW_INIT_SNAKE
+
+	;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;;;;;;;;;;;;print name 1
+	                          mov  si,offset name_s+4
+	
+	                          mov  dx,0102h
+	loopname:                 mov  ah,2
+	                          int  10h
+
+	                          mov  ah,09
+	                          mov  bh,0
+	                          mov  al,[si]
+	                          mov  cx,1h
+	                          mov  bl,059h
+
+	                          int  10h
+
+	                          inc  si                                     	;
+	                          inc  dx
+	                          mov  al,[si]
+	                          cmp  al,'$'
+	                          jnz  loopname
+
+ 
+
+
+	;;;;;;;;;;;;;;;;;;
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+	;;;;;;;;;;;;print name 2
+	                          mov  si,offset name_s2+4
+	
+	                          mov  dx,0144h
+	loopname2:                mov  ah,2
+	                          int  10h
+
+	                          mov  ah,09
+	                          mov  bh,0
+	                          mov  al,[si]
+	                          mov  cx,1h
+	                          mov  bl,04ah
+
+	                          int  10h
+
+	                          inc  si                                     	;
+	                          inc  dx
+	                          mov  al,[si]
+	                          cmp  al,'$'
+	                          jnz  loopname2
+
+ 
+			
+
+
+	;;;;;;;;;;;;;;;;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 	                          CALL MOVE_SNAKE
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;;;;;;;;;;;;;;;;;;;;;;;
+
+						
 	INFF:                     
 	                          JMP  INFF
 	                          HLT
 MAIN ENDP
+
 
 DRAW_HEAD proc  NEAR
 
@@ -586,7 +805,7 @@ DELETE_END PROC NEAR
 	                          MUL  BX
 	                          MOV  DI,AX
 	                          MOV  BX,SNAKE_LEN_ARR[DI]
-	                           SUB  BX,1
+	                          SUB  BX,1
 	                          MOV  AX , BX
 	                          MOV  BX , 2
 	                          MUL  BX
