@@ -5,6 +5,24 @@
 
 	SQUARE_SIZE            DW  31
 
+
+
+; DATA ABOUT FIRST SNAKE
+	ask_name               DB  "Please Enter First player Name:",10,13,'$'
+	name_s                 DB  15,?,15 dup('$')
+	ask_name2              DB  "Please Enter second player Name:",10,13,'$'
+	name_s2                DB  15,?,15 dup('$')
+	new_line               db  10,13
+	pressenterkey          db  "Press Enter Key To Continue",10,13,'$'
+	message                db  "*To start Chatting Press F1",10,13,10,13, '*To Start Snake Trivals Press F2',10,13,10,13,'*To End the Program press ESC',10,13,10,13,'$'
+	chat                   db  'now you start chatting$'
+
+
+
+
+
+
+
 	; DATA ABOUT FIRST SNAKE
 	SNAKE1_COLOR           EQU 2                                                                                                                                                                                  	;GREEN
 	SNAKE1_X               DW  100 DUP(110)                                                                                                                                                                       	; INTITALLY
@@ -261,7 +279,7 @@
 
 	APPLE_X                DW  236,103,	353,211,53,	442,546,490,501,257,404,68,	417,169,252,329,292,197,43,	344,481,514,313,554,484,261,524,312,544,260
 	APPLE_Y                DW  332,254,103,256,189,212,133,175,81,256,117,352,287,240,339,308,290,313,353,281,89,312,114,122,288,324,124,127,198,114
-	APPPLES_NUM            DW  30                                                                                                                                                                                 	; 30 POSSIBLE LOCATIONS FOR APPLES
+	APPLES_NUM            DW  30                                                                                                                                                                                 	; 30 POSSIBLE LOCATIONS FOR APPLES
 	CURR_APPLE_INDEX       DW  0                                                                                                                                                                                  	; THAT REPRESENT WHICH APPLE IS DISPLAYED CURRENLTY
 	CRITICAL_DIST          DW  32                                                                                                                                                                                 	; SNAKE EATS AN APPLE IF THE DISTANCE BETWEEN SNAKE_HEAD_CENTER AND APPLE_CENTER IS 22
 
@@ -269,6 +287,8 @@
 
 
 	SNAKE_LEN_ARR          DW  2,2
+	MAX_TOTAL_LEN          DW  9
+	MIN_TOTAL_LEN          DW  2
 	CHOSEN_SNAKE           DW  ?
 	;DATA ABOUT SNAKE SHAPE
 
@@ -336,11 +356,36 @@
 	                       DB  0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0
 	                       DB  0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 2 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0
 
-
+	FIRE                   DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 91, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 67, 43, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 43, 43, 14, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 43, 43, 43, 14, 91, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 43, 43, 43, 43, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 67, 43, 43, 43, 43, 43, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66
+	                       DB  43, 43, 43, 43, 43, 43, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 43, 43, 43, 43, 43, 43, 43, 43, 90, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 90, 0, 0, 66, 42, 42, 42, 43, 43, 43, 42, 42, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 66, 66, 0, 67, 42, 42, 42, 42, 43, 43, 43, 42, 42, 42, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 43
+	                       DB  90, 42, 42, 42, 42, 42, 42, 43, 43, 43, 42, 42, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 43, 43, 42, 42, 42, 42, 42, 42, 42, 43, 43
+	                       DB  43, 42, 42, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 43, 42, 42, 42, 42, 42, 42, 42, 42, 43, 43, 43, 42, 42, 42, 90, 0, 0, 0, 0
+	                       DB  0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 43, 42, 42, 42, 42, 42, 42, 42, 42, 43, 43, 43, 43, 42, 42, 42, 89, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91
+	                       DB  43, 43, 42, 42, 42, 42, 42, 42, 42, 43, 43, 43, 43, 43, 42, 42, 42, 66, 42, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 43, 42, 42, 42, 42, 42, 42, 42, 42
+	                       DB  43, 43, 43, 43, 42, 42, 42, 42, 65, 42, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 43, 43, 42, 42, 42, 42, 42, 42, 42, 43, 43, 43, 43, 42, 42, 42, 42, 42, 42
+	                       DB  42, 42, 90, 0, 0, 0, 0, 0, 0, 0, 0, 67, 43, 43, 41, 41, 41, 41, 41, 42, 43, 43, 43, 43, 42, 42, 41, 41, 41, 41, 41, 41, 41, 89, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 14, 43, 42, 41, 41, 41, 41, 42, 42, 43, 43, 43, 42, 42, 41, 41, 41, 41, 41, 41, 41, 41, 66, 0, 0, 0, 0, 0, 0, 0, 0, 43, 43, 42, 41, 41, 41, 41
+	                       DB  42, 42, 42, 42, 42, 42, 41, 41, 41, 41, 41, 41, 41, 41, 41, 89, 0, 0, 0, 0, 0, 0, 0, 0, 43, 43, 42, 41, 41, 41, 41, 42, 42, 42, 42, 42, 41, 41, 42, 41
+	                       DB  41, 41, 41, 41, 41, 41, 89, 90, 0, 0, 0, 0, 0, 0, 0, 14, 43, 42, 41, 41, 41, 42, 42, 42, 42, 42, 42, 41, 41, 41, 42, 41, 41, 41, 41, 41, 12, 88, 66, 0
+	                       DB  0, 0, 0, 0, 0, 0, 67, 43, 43, 41, 41, 41, 42, 42, 42, 42, 42, 42, 41, 41, 42, 42, 42, 41, 41, 41, 41, 12, 42, 65, 0, 0, 0, 0, 0, 0, 0, 91, 43, 43
+	                       DB  41, 41, 41, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 41, 41, 41, 41, 42, 41, 89, 0, 0, 0, 0, 0, 0, 0, 91, 67, 43, 42, 41, 41, 42, 42, 42, 42, 42, 42
+	                       DB  42, 42, 42, 42, 42, 41, 41, 41, 41, 42, 42, 0, 0, 0, 0, 0, 0, 0, 0, 67, 14, 14, 43, 41, 40, 41, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 41, 40, 41, 42
+	                       DB  42, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 43, 43, 42, 41, 41, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 41, 41, 42, 42, 65, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0, 0, 91, 43, 43, 43, 42, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 42, 42, 65, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 14, 43, 43, 42, 41
+	                       DB  41, 41, 41, 41, 41, 41, 41, 41, 41, 42, 43, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 66, 42, 42, 41, 41, 41, 41, 41, 41, 41, 42, 42
+	                       DB  43, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 66, 65, 42, 42, 41, 41, 41, 42, 66, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	                       DB  0
 						 
-
-
-
+FIRE_X      DW    445,464,163,103,48,510,372,95,166	,519,392,124,583,290,248,285,588,53,378,95,133,554,281,444,134,146,76,292,187,361
+FIRE_Y      DW    301,96,118,113,295,161,306,137,257,119,290,167,291,241,102,321,144,87,197,163,92,85,292,162,207,269,130,218,203,300
+CURR_FIRE_INDEX DW 0
+FIRES_NUM      DW  30  
 
 	; TEMPS FOR PROC OF DRAWING HEAD
 
@@ -363,12 +408,18 @@
 
 	TEMP_BUFFER1           DB  ?
 	TEMP_BUFFER2           DB  ?
-TEMP_BOOL    DB 0
+
+
+	PLAYER1_SCORE DW 0
+	PLAYER2_SCORE DW 0	
+
+
+
 .CODE
 MAIN PROC FAR
 	                          MOV  AX,@DATA
 	                          MOV  DS,AX
-
+CALL BEFORE_START_SETUP
 	; ENTER GRAPHICS MODE
 	                          MOV  AL,02H
 	                          MOV  AH,4FH
@@ -377,7 +428,7 @@ MAIN PROC FAR
 
 
 	                          MOV  CX,640
-	LLPP:
+	LLPP:                     
 	                          MOV  AH,0Ch
 	                          MOV  AL,05
 	                          MOV  BH,0
@@ -386,14 +437,207 @@ MAIN PROC FAR
 	                          LOOP LLPP
 
 	                    
+			
 	                
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	                          CALL DRAW_INIT_SNAKE
+
+
+CALL DRAW_STATUS_BAR
+
 	                          CALL MOVE_SNAKE
 	INFF:                     
 	                          JMP  INFF
 	                          HLT
 MAIN ENDP
+
+
+DRAW_STATUS_BAR PROC NEAR 
+
+
+;;;;;;;;;;;;print name 1
+	                          mov  si,offset name_s+4
+	
+	                          mov  dx,0102h
+	loopname:                 mov  ah,2
+	                          int  10h
+
+	                          mov  ah,09
+	                          mov  bh,0
+	                          mov  al,[si]
+	                          mov  cx,1h
+	                          mov  bl,059h
+
+	                          int  10h
+
+	                          inc  si                                     	;
+	                          inc  dx
+	                          mov  al,[si]
+	                          cmp  al,'$'
+	                          jnz  loopname
+
+ 
+
+
+	;;;;;;;;;;;;;;;;;;
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+	;;;;;;;;;;;;print name 2
+	                          mov  si,offset name_s2+4
+	
+	                          mov  dx,0144h
+	loopname2:                mov  ah,2
+	                          int  10h
+
+	                          mov  ah,09
+	                          mov  bh,0
+	                          mov  al,[si]
+	                          mov  cx,1h
+	                          mov  bl,04ah
+
+	                          int  10h
+
+	                          inc  si                                     	;
+	                          inc  dx
+	                          mov  al,[si]
+	                          cmp  al,'$'
+	                          jnz  loopname2
+
+
+							  RET 
+
+							  DRAW_STATUS_BAR ENDP
+
+
+
+BEFORE_START_SETUP PROC NEAR
+;clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	; text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,081fh
+	         int 10h
+	         mov ah,09
+	         mov dx ,offset ask_name
+	         int 21h
+	;set curser
+	         mov ah,2
+	         mov dx,091fh
+	         int 10h
+	;input his name
+	         mov ah,0ah
+	         mov dx,offset name_s+2
+	         int 21h
+	;;;;second player
+	         mov ah,2
+	         mov dx,0a1fh
+	         int 10h
+	         mov ah,09
+	         mov dx ,offset ask_name2
+	         int 21h
+	;set curser
+	         mov ah,2
+	         mov dx,0b1fh
+	         int 10h
+	;input his name
+	         mov ah,0ah
+	         mov dx,offset name_s2+2
+	         int 21h
+	;;;;;;;
+
+
+	;set curser
+	         mov ah,2
+	         mov dx,0c1fh
+	         int 10h
+	;out put of press any key to continue
+	         mov ah,09
+	         mov dx,offset pressenterkey
+	         int 21h
+	;wait for press key
+	label1:  mov ah,0
+	         int 16h
+	         cmp ah,28
+	         jnz label1
+
+	;to clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	;text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,0800h
+	         int 10h
+	;input in page 2
+	         mov ah,09
+	         mov dx,offset message
+	         int 21h
+	; to make zero flag not equal zero
+	         add ah,2
+	;wait for prees key
+	return:  mov ah,0
+	         int 16h
+
+	         cmp ah,59
+	         jz  Chatting
+
+	         cmp ah,1
+	         jz  exit
+
+	         cmp ah,60
+	         jz  startGame
+							  
+ 
+	         jnz return
+
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;for chatting not complete
+
+	chatting:
+	;to clean screen
+	         mov ax,0600h
+	         mov cx,0
+	         mov dx,184fh
+	         int 10h
+	;text mode
+	         mov ax,3
+	         int 10h
+
+
+	         mov ah,2
+	         mov dx,0000h
+	         int 10h
+	         mov ah,09
+	         mov dx,offset chat
+	         int 21h
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+exit:
+.EXIT
+
+startGame:
+
+RET 
+BEFORE_START_SETUP ENDP 
+
+
 
 DRAW_HEAD proc  NEAR
 
@@ -470,7 +714,7 @@ DRAW_APPLE PROC NEAR
 
 	;;;;;;;;;;;;;;;;VALIDATION
 
-	                          MOV  AX,APPPLES_NUM
+	                          MOV  AX,APPLES_NUM
 	                          MOV  BX,2
 	                          MUL  BX
 	                          SUB  AX,4                                   	; TRIVIAL NUMBER => STOP BEFORE END
@@ -493,6 +737,37 @@ DRAW_APPLE PROC NEAR
 
 	                          RET
 DRAW_APPLE ENDP
+
+
+
+DRAW_FIRE PROC NEAR
+
+	;;;;;;;;;;;;;;;;VALIDATION
+
+	                          MOV  AX,FIRES_NUM
+	                          MOV  BX,2
+	                          MUL  BX
+	                          SUB  AX,4                                   	; TRIVIAL NUMBER => STOP BEFORE END
+	                          CMP  CURR_FIRE_INDEX,AX
+	                          JB   NOT_END_OF_FIRES_ARR
+	                          MOV  CURR_FIRE_INDEX,0
+	NOT_END_OF_FIRES_ARR:    
+	                          MOV  SI,OFFSET FIRE_X
+	                          MOV  BX, CURR_FIRE_INDEX
+	                          MOV  DX, [SI+BX]
+	                          MOV  TEMP_HEAD_X ,DX
+
+	                          MOV  SI,OFFSET FIRE_Y
+	                          MOV  BX, CURR_FIRE_INDEX
+	                          MOV  DX, [SI+BX]
+	                          MOV  TEMP_HEAD_Y ,DX
+			 
+	                          MOV  TEMPHEAD, OFFSET FIRE
+	                          CALL DRAW_HEAD
+
+	                          RET
+DRAW_FIRE ENDP
+
 
 DRAW_SQUARE PROC NEAR                                                 		; GIVE IT INITIAL_SQUARE_X, AND INITIAL_SQUARE_Y AND TEMP_COLOR
 
@@ -872,13 +1147,10 @@ MOVE_SNAKE2_UP PROC NEAR
 	                          MOV  INIT_SQUARE_Y,DX
 	                          CALL DRAW_BODY
 
-
 	EXITUP2:                  
 	                          RET
 							
-	
-
-	                          
+                          
 MOVE_SNAKE2_UP ENDP
 
 
@@ -909,11 +1181,9 @@ MOVE_SNAKE2_DOWN PROC NEAR
 	                          CALL DRAW_BODY
 	EXIT_DOWN2:               
 	                          RET
-
-	               
-	                         
-	                         
+                                           
 MOVE_SNAKE2_DOWN ENDP
+
 
 
 MOVE_SNAKE2_RIGHT PROC NEAR
@@ -984,26 +1254,155 @@ MOVE_SNAKE2_LEFT PROC NEAR
 
 MOVE_SNAKE2_LEFT ENDP
 
-INCREASE_LEN PROC NEAR                                                		; TAKE CHOSEN_SNAKE,
+INCREASE_LEN PROC NEAR                                                		; TAKES CHOSEN_SNAKE,
 	                          CMP  CHOSEN_SNAKE,1
 	                          JZ   CHOSEN_SNAKE_IS_1
 	                          MOV  SI,OFFSET SNAKE2_X
 	                          MOV  DI,OFFSET SNAKE2_Y
+	                          MOV  DX,MAX_TOTAL_LEN
+	                          CMP  SNAKE_LEN_ARR[2],DX
+	                          JE   MAX_LENN
 	                          ADD  SNAKE_LEN_ARR[2],1
+							  ADD PLAYER2_SCORE,5
+	MAX_LENN:                  
 	                          JMP  END_OF_CHOOSING_THE_SNAKE
 	CHOSEN_SNAKE_IS_1:        
 	                          MOV  SI,OFFSET SNAKE1_X
 	                          MOV  DI,OFFSET SNAKE1_Y
+	                          MOV  DX,MAX_TOTAL_LEN
+	                          CMP  SNAKE_LEN_ARR[0],DX
+	                          JE   MAX_LEN2
 	                          ADD  SNAKE_LEN_ARR[0],1
+							  ADD PLAYER1_SCORE ,5
+	MAX_LEN2:                 
 	END_OF_CHOOSING_THE_SNAKE:
 							
-
-							  
-
-
-
 	                          RET
-	                    INCREASE_LEN      ENDP
+INCREASE_LEN ENDP
+
+
+DECREASE_LEN PROC NEAR
+                      		  CMP  CHOSEN_SNAKE,1
+	                          JZ   CHOSEN_SNAKEE_IS_1
+
+							  MOV  DX,MIN_TOTAL_LEN
+	                          CMP  SNAKE_LEN_ARR[2],DX
+	                          JBE   MIN_LEN_L 
+							  
+							  CALL DELETE_END
+	                          SUB  SNAKE_LEN_ARR[2],1
+							  SUB PLAYER2_SCORE,5
+	MIN_LEN_L:                  
+	                          JMP  END_OF_CHOOSING_THE_SNAKES
+	CHOSEN_SNAKEE_IS_1:        
+	                         
+	                          MOV  DX,MIN_TOTAL_LEN
+	                          CMP  SNAKE_LEN_ARR[0],DX
+	                          JBE   MIN_LEN2 
+							  CALL DELETE_END
+	                          SUB  SNAKE_LEN_ARR[0],1
+							  SUB PLAYER1_SCORE,5
+	MIN_LEN2:                 
+	END_OF_CHOOSING_THE_SNAKES:
+							
+	                          RET
+DECREASE_LEN ENDP
+;//////////////////////////////////////////////////////////////////////
+CHECK_FIRE PROC NEAR
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  AX, [FIRE_X+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE1_X[0]                         	;   BX will INITIALLY contain the x-cordiante of the head of snake 1
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_X_CHECKING_F                	; GE==GREATER EQUAL
+	                          XCHG AX,BX                                  	; IF BX IS LARGER THAN AX SO XCHG THEM
+	A_GE_B_FOR_X_CHECKING_F:    
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JG   END_OF_SNAKE1_FALSE_F                    	; CONDITION IS FALSE , RET
+
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  AX, [FIRE_Y+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE1_Y[0]
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_Y_CHECKING_F
+	                          XCHG AX,BX
+
+	A_GE_B_FOR_Y_CHECKING_F:    
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JBE  END_OF_SNAKE1_TRUE_F                     	; CONDITION IS TRUE
+
+	                          JMP  END_OF_SNAKE1_FALSE_F
+
+	END_OF_SNAKE1_TRUE_F:                                                   	; CONDITION IS TRUE
+	                          MOV  TEMP_COLOR,00h                         	; PREPARING FOR DELETING THE APPLE
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  DX,[FIRE_X+BX]
+	                          MOV  INIT_SQUARE_X,DX
+	                          MOV  DX,[FIRE_Y+BX]
+	                          MOV  INIT_SQUARE_Y,DX
+	                          CALL DRAW_SQUARE
+	                          ADD  CURR_FIRE_INDEX,2
+	                          MOV  CHOSEN_SNAKE,1
+	                          CALL DECREASE_LEN
+
+	                          JMP  ENDD_F
+
+
+	END_OF_SNAKE1_FALSE_F:      
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;THE 2ND SNAKE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  AX, [FIRE_X+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE2_X[0]                         	;   BX will INITIALLY contain the x-cordiante of the head of snake 1
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_X_CHECKING2_F                	; GE==GREATER EQUAL
+	                          XCHG AX,BX                                  	; IF BX IS LARGER THAN AX SO XCHG THEM
+	A_GE_B_FOR_X_CHECKING2_F:   
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JG   ENDD_F                                   	; CONDITION IS FALSE , RET
+
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  AX, [FIRE_Y+BX]                       	;   AX will INITIALLY contain the x-cordiante of the apple
+	                          MOV  BX,SNAKE2_Y[0]
+
+	                          CMP  BX,AX
+	                          JNG  A_GE_B_FOR_Y_CHECKING2_F
+	                          XCHG AX,BX
+
+	A_GE_B_FOR_Y_CHECKING2_F:   
+	                          MOV  DX,CRITICAL_DIST
+	                          SUB  AX,BX                                  	; AX WILL CONTAIN THE REAL DISTANCE
+	                          CMP  AX,DX                                  	; COMPARE THE DISTANCE BETWEEN SNAKE1_HEAD_CENTER AND APPLE_X BY CRITICAL DISTANCE
+	                          JBE  END_OF_SNAKE2_TRUE2_F                    	; CONDITION IS TRUE
+
+	                          JMP  ENDD_F
+
+	END_OF_SNAKE2_TRUE2_F:                                                  	; CONDITION IS TRUE
+	                          MOV  TEMP_COLOR,00h                         	; PREPARING FOR DELETING THE APPLE
+	                          MOV  BX,CURR_FIRE_INDEX
+	                          MOV  DX,[FIRE_X+BX]
+	                          MOV  INIT_SQUARE_X,DX
+	                          MOV  DX,[FIRE_Y+BX]
+	                          MOV  INIT_SQUARE_Y,DX
+	                          CALL DRAW_SQUARE
+	                          ADD  CURR_FIRE_INDEX,2
+	                          MOV  CHOSEN_SNAKE,2
+	                          CALL DECREASE_LEN
+
+	                          JMP  ENDD_F
+							  
+							
+	ENDD_F:                     
+	                          RET
+CHECK_FIRE ENDP
 
 CHECK_FOOD PROC NEAR
 	                          MOV  BX,CURR_APPLE_INDEX
@@ -1103,19 +1502,60 @@ CHECK_FOOD ENDP
 
 
 MOVE_SNAKE PROC NEAR
-
-	                    
+                    
 	START:                    
-	                         CALL DRAW_APPLE
-	                          CALL CHECK_FOOD
-	                        
-	;NOW AL HAVE ASCII AND AH HAVE SCAN
-	;MOV AH,72                
-	                       
-						      mov  ah,0
+	                         	    			           
+	                          mov  ah,0
 	                          int  16h
-						CMP TEMP_BOOL,0
-						JZ SNAKE_TWO_MOVES
+							 
+						
+	                          CMP  AH ,72
+	                          JZ   SNAKE_1
+	                          CMP  AH ,80
+	                          JZ   SNAKE_1
+	                          CMP  AH,77
+	                          JZ   SNAKE_1
+	                          CMP  AH,75
+	                          JZ   SNAKE_1
+	                   
+							
+	         
+	                          CMP  AH ,11H
+	                          JZ   SNAKE_1
+	                          CMP  AH ,1FH
+	                          JZ   SNAKE_1
+	                          CMP  AH,20H
+	                          JZ   SNAKE_1
+	                          CMP  AH,1EH
+	                          JZ   SNAKE_1
+
+	                          JMP  START
+
+			NEW_START:
+							  CALL DRAW_APPLE
+	                          CALL CHECK_FOOD
+							  CALL DRAW_FIRE
+	                          CALL CHECK_FIRE
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;DELAY MACRO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+MOV CX,0001H
+MOV DX,0FFFH
+MOV AH,86H
+INT 15H
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+	                          MOV  AH,1
+	                          INT  16h
+	                          JZ   GO_AS_BEFORE
+
+							  MOV AH,0
+							  INT 16H
+
+
+	SNAKE_1:
 	                          CMP  AH ,72
 	                          JZ   UP1
 	                          CMP  AH ,80
@@ -1123,7 +1563,32 @@ MOVE_SNAKE PROC NEAR
 	                          CMP  AH,77
 	                          JZ   RIGHT1
 	                          CMP  AH,75
-	                          JZ   L_TEMP1
+	                          JZ  LEFT1_HELP
+	                   
+							
+	SNAKE_2:          
+	                          CMP  AH ,11H
+	                          JZ   UPDATE_TEMP_BUFFER2
+	                          CMP  AH ,1FH
+	                          JZ   UPDATE_TEMP_BUFFER2
+	                          CMP  AH,20H
+	                          JZ   UPDATE_TEMP_BUFFER2
+	                          CMP  AH,1EH
+	                          JZ   UPDATE_TEMP_BUFFER2
+
+
+                             JMP GO_AS_BEFORE
+
+
+							UPDATE_TEMP_BUFFER2:
+							MOV TEMP_BUFFER2,AH
+							MOV AH,TEMP_BUFFER1
+							JMP SNAKE_1
+
+
+	GO_AS_BEFORE:             
+
+			
 	                          CMP  TEMP_BUFFER1 ,72
 	                          JZ   UP1
 	                          CMP  TEMP_BUFFER1 ,80
@@ -1132,16 +1597,8 @@ MOVE_SNAKE PROC NEAR
 	                          JZ   RIGHT1
 	                          CMP  TEMP_BUFFER1,75
 	                          JZ   LEFT1
-							
-	SNAKE_TWO_MOVES:          
-	                          CMP  AH ,11H
-	                          JZ   UP2
-	                          CMP  AH ,1FH
-	                          JZ   D_TEMP2
-	                          CMP  AH,20H
-	                          JZ   R_TEMP2
-	                          CMP  AH,1EH
-	                          JZ   L_TEMP2
+	                   
+	SNAKE2_LABEL:             
 	                          CMP  TEMP_BUFFER2 ,11H
 	                          JZ   UP2
 	                          CMP  TEMP_BUFFER2 ,1FH
@@ -1151,67 +1608,64 @@ MOVE_SNAKE PROC NEAR
 	                          CMP  TEMP_BUFFER2,1EH
 	                          JZ   LEFT2
 
-	                          JMP  START
 
-	L_TEMP1:                  
-	                          JMP  LEFT1
-	R_TEMP2:                  
-	                          JMP  RIGHT2
-	L_TEMP2:                  
-	                          JMP  LEFT2
-	D_TEMP2:                  
-	                          JMP  DOWN2
+							JMP NEW_START  ;
+
+LEFT1_HELP:
+JMP LEFT1
 
 	UP1:                      
-                     
+	      
 	                          CALL MOVE_SNAKE1_UP
-	                          MOV  TEMP_BUFFER1,72
-	                          MOV  TEMP_BOOL,0
-	                          JMP  START
+							  MOV  TEMP_BUFFER1 ,72
+	                          JMP  SNAKE2_LABEL
+
+	                          JMP  NEW_START
 
 	DOWN1:                    
 	                          CALL MOVE_SNAKE1_DOWN
-	                          MOV  TEMP_BUFFER1,80
-	                          MOV  TEMP_BOOL,0
-	                          JMP  START
+							   MOV  TEMP_BUFFER1 ,80
+	                          JMP  SNAKE2_LABEL
+
+	                          JMP  NEW_START
 
 	RIGHT1:                   
 	                          CALL MOVE_SNAKE1_RIGHT
-	                          MOV  TEMP_BUFFER1,77
-	                          MOV  TEMP_BOOL,0
-	                          JMP  START
+							  MOV  TEMP_BUFFER1,77
+	                          JMP  SNAKE2_LABEL
+
+	                          JMP  NEW_START
 
 	LEFT1:                    
 	                          CALL MOVE_SNAKE1_LEFT
-	                          MOV  TEMP_BUFFER1,75
-	                          MOV  TEMP_BOOL,0
-	                          JMP  START
+							  MOV  TEMP_BUFFER1,75
+	                          JMP  SNAKE2_LABEL
+
+	                          JMP  NEW_START
+
 
 	UP2:                      
 	                          CALL MOVE_SNAKE2_UP
-	                          MOV  TEMP_BUFFER2,11H
-	                          MOV  TEMP_BOOL,1
-	                          JMP  START
+	                  
+	                          JMP  NEW_START
 
 	DOWN2:                    
 	                          CALL MOVE_SNAKE2_DOWN
-	                          MOV  TEMP_BUFFER2,1FH
-	                          MOV  TEMP_BOOL,1
-	                          JMP  START
+	                 
+	                          JMP  NEW_START
 
 	RIGHT2:                   
 	                          CALL MOVE_SNAKE2_RIGHT
-	                          MOV  TEMP_BUFFER2,20H
-	                          MOV  TEMP_BOOL,1
-	                          JMP  START
+	                      
+	                          JMP  NEW_START
 
 	LEFT2:                    
 	                          CALL MOVE_SNAKE2_LEFT
-	                          MOV  TEMP_BUFFER2,1EH
-	                          MOV  TEMP_BOOL,1
-	                          JMP  START
+	                    
+	                          JMP  NEW_START
 							
+
+
 	                          RET
 MOVE_SNAKE ENDP
-
 END MAIN
