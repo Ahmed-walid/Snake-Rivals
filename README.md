@@ -4,5 +4,5 @@
 There are scattered apples that appear randomly in the playground that increases your score by five, on the other hand, fires decrease your score by five. Some power-ups like biting and freezing are available 
 head by head collision ends the game.
 
-![Screen shot](./https://github.com/Ahmed-walid/Snake-Rivals/main/Snake_Rivals.png?raw=true)
+![Snake_Rivals](https://user-images.githubusercontent.com/62077516/103485403-a3cbb380-4dfe-11eb-98be-47b1d290bd10.png)
 
