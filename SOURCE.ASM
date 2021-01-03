@@ -1318,33 +1318,62 @@ BEFORE_START_SETUP PROC NEAR
 	                    mov  dx ,offset ask_name
 	                    int  21h
 	;set curser
-	                    mov  ah,2
+	                   v_c:  mov  ah,2
 	                    mov  dx,091fh
 	                    int  10h
 	;input his name
 	                    mov  ah,0ah
 	                    mov  dx,offset name_s+2
 	                    int  21h
+   mov  dl,name_s+4
+	                    cmp  dl,41H
+	                    jl   v_c
+	                    cmp  dl,7ah
+	                    jg   v_c
+	                    cmp  dl,5ah
+	                    jg   chek_a
+	                    jle  continue_in
+	                    
+	chek_a:             
+	                    cmp  dl,61H
+	                    jl   v_c
+
 	;;;;second player
-	                    mov  ah,2
+	                    continue_in:mov  ah,2
 	                    mov  dx,0a1fh
 	                    int  10h
 	                    mov  ah,09
 	                    mov  dx ,offset ask_name2
 	                    int  21h
 	;set curser
-	                    mov  ah,2
+	                  v_c2:  mov  ah,2
 	                    mov  dx,0b1fh
 	                    int  10h
 	;input his name
 	                    mov  ah,0ah
 	                    mov  dx,offset name_s2+2
 	                    int  21h
+						;;;;;;;;;;validation
+	
+	                    mov  dl,name_s2+4
+	                    cmp  dl,41H
+	                    jl   v_c2
+	                    cmp  dl,7ah
+	                    jg   v_c2
+	                    cmp  dl,5ah
+	                    jg   chek_a2
+	                    jle  continue_in2
+	                    
+	chek_a2:            
+	                    cmp  dl,61H
+	                    jl   v_c2
+	                 
+	;;;;;;;
 	;;;;;;;
 
 
 	;set curser
-	                    mov  ah,2
+	                   continue_in2: mov  ah,2
 	                    mov  dx,0c1fh
 	                    int  10h
 	;out put of press any key to continue
