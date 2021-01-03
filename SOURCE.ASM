@@ -592,6 +592,11 @@ MOV TEMP_HEAD_Y ,100
 MOV PLAYER1_SCORE , 0
 MOV	PLAYER2_SCORE ,0
 
+
+
+MOV TEMP_BUFFER1,0
+MOV	TEMP_BUFFER2,0          
+
 MOV	temp1_score,0
 MOV	temp2_score ,0
 MOV	temp_to_addation   ,0
