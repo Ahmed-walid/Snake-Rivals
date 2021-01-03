@@ -576,14 +576,30 @@ MAIN PROC FAR
 	                    HLT
 MAIN ENDP
 RESET_GAME PROC NEAR
+
+
+mov cx,15
+mov BX,2
+lp1:
+mov [name_s+bx],'$'
+INC BX
+loop lp1
+
+mov cx,15
+mov BX,2
+lp2:
+mov [name_s2+bx],'$'
+INC BX
+loop lp2
+
 MOV SNAKE1_X ,500                                                                                                                                                                                           	; INTITALLY
 MOV SNAKE1_Y ,210
 MOV SNAKE2_X ,160                                                                                                                                                                                           	; INTITALLY
 MOV SNAKE2_Y ,210 
-MOV SNAKE_LEN_ARR[0],2
-MOV SNAKE_LEN_ARR[1],0
-MOV SNAKE_LEN_ARR[2],2
-MOV SNAKE_LEN_ARR[3],0
+MOV  BYTE PTR SNAKE_LEN_ARR[0],2
+MOV  BYTE PTR SNAKE_LEN_ARR[1],0
+MOV  BYTE PTR SNAKE_LEN_ARR[2],2
+MOV BYTE PTR SNAKE_LEN_ARR[3],0
 MOV CURR_APPLE_INDEX , 0   
 
 MOV CURR_FIRE_INDEX , 0
