@@ -2223,7 +2223,7 @@ INCREASE_LEN PROC NEAR                                                          
 								MOV AX, SNAKE_LEN_ARR[2]
 								MOV BX,2
 								MUL BX
-								DEC AX
+								SUB AX,2
 								MOV BX,AX
 								MOV CX,SNAKE2_X[BX-2]
 								MOV DX,SNAKE2_Y[BX-2]
@@ -2254,7 +2254,7 @@ INCREASE_LEN PROC NEAR                                                          
 										MOV AX, SNAKE_LEN_ARR[0]
 								MOV BX,2
 								MUL BX
-								DEC AX
+								SUB AX,2
 								MOV BX,AX
 								MOV CX,SNAKE1_X[BX-2]
 								MOV DX,SNAKE1_Y[BX-2]
