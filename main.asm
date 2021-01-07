@@ -24,13 +24,25 @@ portinitialization MACRO
                   ;11:8bits
 	out dx,al
 ENDM portinitialization
+SEND MACRO
+LOCAL AGAIN 
+mov dx , 3FDH ; Line Status Register
+AGAIN: In al , dx ;Read Line Status
+test al , 00100000b
+JZ AGAIN ;Not empty (This line may need to change)
+;If empty put the VALUE in Transmit data register
+mov dx , 3F8H ; Transmit data register
+mov al,VALUE
+out dx , al
+RET
+ENDM SEND 
 .MODEL HUGE
 .STACK 128
 .DATA
 
 	SQUARE_SIZE            DW  31
 
-
+VALUE DB ?
 
 	; DATA ABOUT FIRST SNAKE
 	ask_name               DB  "Please Enter First player Name:",10,13,'$'
@@ -569,20 +581,22 @@ ENDM portinitialization
 	temp_score_t           dw  ?
 	equlity                db  "THE TWO PLAYERS TIED $"
 	snake_text             db  "SNAKE RIVALS $"
-
+	player_num             db  ?
 .CODE
 MAIN PROC FAR
 	                    MOV  AX,@DATA
 	                    MOV  DS,AX
+						portinitialization
 	                    mov  si,offset snake_text
 	                    mov  bl,02h
 	                    call game_over_text
 	                    call print_Rules
 	CONT_THE_GAME:      
+	
 	                    CALL RESET_GAME
 	                    CALL BEFORE_START_SETUP
 	                    CALL ask_for_time
-	                 
+
 	; ENTER GRAPHICS MODE
 	                    MOV  AL,02H
 	                    MOV  AH,4FH
@@ -591,7 +605,10 @@ MAIN PROC FAR
 	                    CALL DRAW_BACK_G
 	                    CALL DRAW_INIT_SNAKE
 	                    CALL DRAW_STATUS_BAR
+
+
 	                    CALL MOVE_SNAKE
+
 	                    mov  si,offset game_end
 	                    mov  bl,04h
 	                    call game_over_text
@@ -605,6 +622,114 @@ MAIN PROC FAR
 	                    JMP  INFF
 	                    HLT
 MAIN ENDP
+; chat1 proc near
+; ;set divisor
+; mov dx,3fbh ; Line Control Register
+; mov al,10000000b ;Set Divisor Latch Access Bit
+; out dx,al
+; ;set lsb
+; mov dx,3f8h
+; mov al,0ch
+; out dx,al
+; ;set msb
+; mov dx,3f9h
+; mov al,00h
+; out dx,al
+; ;set port
+; mov dx,3fbh
+; mov al,00011011b
+; out dx,al
+; ;;;;;;;;;sending
+; ;;;;;;;;set cursor
+;  mov  ax,0600h
+; 	                    mov  cx,0
+; 	                    mov  dx,184fh
+; 	                    int  10h
+; 	                    mov  ax, 3
+; 	                    int  10h
+; 					mov ah,0
+; int 16h
+; inf:mov ah,2
+; mov bh , 0
+; mov dx,0000
+; int 10h
+; ;;;;;;;;;;if press key
+; mov ah,1
+; int 16h
+; jz re
+; mov ah,0
+; int 16h
+; ; cmp al,1bh ;ESC key
+; ; jz exit2
+; ;;;;;;;;;;;;;;printing
+; mov ah,2
+; mov dl,al
+; mov VALUE,al
+
+; int 21h
+; mov  ah,09
+; 	                    mov  bh,0
+; 	                    mov  al,value
+; 	                    mov  cx,2h
+; 	                    mov  bl,5
+
+; 	                    int  10h
+; ;;;;;;;;;;;;;;;;;;;;;;;;
+; mov dx , 3FDH ; Line Status Register
+; AGAIN: In al , dx ;Read Line Status
+;  test al , 00100000b
+;  JZ AGAIN 
+
+; ;If empty put the VALUE in Transmit data register
+;  mov dx , 3F8H ; Transmit data register
+;  mov al,VALUE
+;  out dx , al
+; ;;;;;;;;;;;;;;;;;;;transmit
+; ;;;;;;;set cursor
+
+
+
+
+
+; ;;;;;;;;;;;;;;;;;;;
+; re:
+
+; ;Check that Data is Ready
+; mov dx , 3FDH ; Line Status Register
+;  in al , dx 
+;  test al , 1
+;  JZ CHK ;Not Ready
+; ;If Ready read the VALUE in Receive data register
+;  mov dx , 03F8H
+;  in al , dx
+; mov VALUE , al
+
+; mov ah,2
+; mov bh , 0
+; mov dx,0900
+; int 10h
+
+ 
+;  mov ah,2
+;  mov al , value
+; mov dl,al
+; ;mov VALUE,al
+
+; int 21h
+; mov  ah,09
+; 	                    mov  bh,0
+; 	                    mov  al,value
+; 	                    mov  cx,2h
+; 	                    mov  bl,5
+
+; 	                    int  10h
+; CHK:
+; jmp inf
+
+
+; exit2:
+; ret
+; chat1 endp
 RESET_GAME PROC NEAR
 	                    mov  cx,15
 	                    mov  BX,2
@@ -2790,13 +2915,241 @@ ONE_IS_FREEZED PROC  NEAR
 	END_FUNC1:                  
 	                            RET
 ONE_IS_FREEZED ENDP
+; SEND PROC NEAR
+; mov dx , 3FDH ; Line Status Register
+; AGAIN: In al , dx ;Read Line Status
+; test al , 00100000b
+; JZ AGAIN ;Not empty (This line may need to change)
+; ;If empty put the VALUE in Transmit data register
+; mov dx , 3F8H ; Transmit data register
+; mov al,VALUE
+; out dx , al
+; RET
+; SEND ENDP
+SEND_DATA PROC NEAR
+mov value , 'A'
+SEND
+; 18 SNAKE1_X
+MOV CX , 18
+MOV BX , 0
+LS1:
+MOV AL , BYTE PTR SNAKE1_X[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS1
+
+mov value , 'B'
+SEND
+; 18 SNAKE1_Y
+MOV CX , 18
+MOV BX , 0
+LS2:
+MOV AL , BYTE PTR SNAKE1_Y[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS2
+
+mov value , 'C'
+SEND
+
+; 18 SNAKE2_X
+MOV CX , 18
+MOV BX , 0
+LS3:
+MOV AL , BYTE PTR SNAKE2_X[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS3
+
+mov value , 'D'
+SEND
+; 18 SNAKE2_Y
+MOV CX , 18
+MOV BX , 0
+LS4:
+MOV AL , BYTE PTR SNAKE2_Y[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS4
+
+mov value , 'E'
+SEND
+
+; 4 LEN_ARR
+MOV CX , 4
+MOV BX , 0
+LS5:
+MOV AL , BYTE PTR SNAKE_LEN_ARR[BX]
+MOV VALUE, BYTE PTR AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS5
+
+mov value , 'F'
+SEND
+; 2 SCORE1
+MOV CX , 2
+MOV BX , 0
+LS6:
+MOV AL , BYTE PTR PLAYER1_SCORE[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS6
+
+mov value , 'G'
+SEND
+
+; 2 SCORE2
+MOV CX , 2
+MOV BX , 0
+LS7:
+MOV AL , BYTE PTR PLAYER2_SCORE[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS7
+
+mov value , 'H'
+SEND
+
+; SECONDS
+MOV AL , DISPLAYED_SECONDS
+MOV VALUE, AL
+SEND
+
+mov value , 'I'
+SEND
+;MINS
+MOV AL , DISPLAYED_MINUTES
+MOV VALUE, AL
+SEND
+
+mov value , 'J'
+SEND
+
+; 2 INDEX_FIRE
+MOV CX , 2
+MOV BX , 0
+LS8:
+MOV AL , BYTE PTR CURR_FIRE_INDEX[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS8
+
+mov value , 'K'
+SEND
+; 2 INDEX_APPLE
+MOV CX , 2
+MOV BX , 0
+LS9:
+MOV AL , BYTE PTR CURR_APPLE_INDEX[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS9
+
+mov value , 'L'
+SEND
+; 2 SNAKE1_HEAD_DIR
+MOV CX , 2
+MOV BX , 0
+LS10:
+MOV AL , BYTE PTR SNAKE1_HEAD_DIRECTION[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS10
+
+mov value , 'M'
+SEND
+
+
+; 2 SNAKE2_HEAD_DIR
+MOV CX , 2
+MOV BX , 0
+LS11:
+MOV AL , BYTE PTR SNAKE2_HEAD_DIRECTION[BX]
+MOV VALUE, AL
+PUSH BX
+PUSH CX
+SEND
+POP CX
+POP BX 
+INC BX
+LOOP LS11
+RET
+SEND_DATA ENDP
 MOVE_SNAKE PROC NEAR
-                    
+
+
 	START:                      
-	                         	    			           
+	                         	BEG:
+								;Check that Data is Ready
+								mov dx , 3FDH ; Line Status Register
+								in al , dx
+								test al , 1
+								JZ CHK ;Not Ready (This line may need to change)
+								;If Ready read the VALUE in Receive data register
+								mov dx , 03F8H
+								in al , dx
+								mov VALUE , al
+								MOV AH , VALUE
+								JMP BEG1
+								CHK:
+								mov  ah,1
+	                            int  16h
+								JNZ  BEG2
+								JMP BEG  
+						BEG2:  			           
 	                            mov  ah,0
 	                            int  16h
-							 
+							 BEG1:
 						
 	                            CMP  AH ,72
 	                            JZ   SNAKE_1_HELP
@@ -2824,7 +3177,10 @@ MOVE_SNAKE PROC NEAR
 	SNAKE_1_HELP:               
 	                            JMP  SNAKE_1
 
-	NEW_START:                  
+NEW_START:  
+CALL SEND_DATA
+
+
 	                            CALL Print_time
 	                            CALL DRAW_APPLE
 	                            CALL CHECK_FOOD
@@ -2836,8 +3192,7 @@ MOVE_SNAKE PROC NEAR
 	                            CALL ONE_IS_FREEZED
 	                            CALL TWO_IS_FREEZED
 	                            CALL DRAW_SNAKES
-	                            CMP  END_OF_THE_GAME,0
-	                            JNZ  RETURN_TO_MAIN_HELP_HELP
+	                            
 	                            
 								
 
@@ -2849,6 +3204,8 @@ MOVE_SNAKE PROC NEAR
 	                            MOV  DX, POWER_UP1_PENALITY
 	                            MOV  SNAKE1_FREEZE,DX
 	                            JMP  END_OF_FREEZE_CHECKING
+								CMP  END_OF_THE_GAME,0
+	                            JNZ  RETURN_TO_MAIN_HELP_HELP
 	FREEZE_SNAKE2:              
 	                            MOV  NUM_C_EAT_SNAKE1,0
 	                            MOV  DX, POWER_UP1_PENALITY
@@ -2856,25 +3213,35 @@ MOVE_SNAKE PROC NEAR
 	END_OF_FREEZE_CHECKING:     
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;DELAY MACRO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	                            MOV  CX,0000H
-	                            MOV  DX,09FFFH
-	                            MOV  AH,86H
-	                            INT  15H
+	                            ; MOV  CX,0000H
+	                            ; MOV  DX,000FH
+	                            ; MOV  AH,86H
+	                            ; INT  15H
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
+	;Check that Data is Ready
+mov dx , 3FDH ; Line Status Register
+in al , dx
+test al , 1
+JZ CHK1 ;Not Ready (This line may need to change)
+;If Ready read the VALUE in Receive data register
+mov dx , 03F8H
+in al , dx
+mov VALUE , al
+MOV AH , VALUE 
+JMP AS_GETTING_KEY
+CHK1: 
 	                            MOV  AH,1
 	                            INT  16h
 	                            JZ   GO_AS_BEFORE
 
 	                            MOV  AH,0
 	                            INT  16H
-
+AS_GETTING_KEY:
                                
 	SNAKE_1:                    
-	;CMP SNAKE1_FREEZE , 0
-	;JNE SKIP_SNAKE1_WHEN_FREEZE
+	
 	                            CMP  AH ,3EH
 	                            JZ   RETT
 	                            JMP  CONTIN
@@ -2907,7 +3274,8 @@ MOVE_SNAKE PROC NEAR
 
 
 
-
+RETURN_TO_MAIN_HELP_HELP:   
+	                            JMP  RETURN_TO_MAIN_HELP
 	UP1_HELP_HELP:              
 	                            JMP  UP1_HELP
 
@@ -2916,8 +3284,7 @@ MOVE_SNAKE PROC NEAR
 
 	DOWN1_HELP_HELP:            
 	                            JMP  DOWN1_HELP
-	RETURN_TO_MAIN_HELP_HELP:   
-	                            JMP  RETURN_TO_MAIN_HELP
+	
 
 	LEFT1_HELP_HELP:            
 	                            JMP  LEFT1_HELP
@@ -3084,4 +3451,50 @@ MOVE_SNAKE PROC NEAR
 	RETURN_TO_MAIN:             
 	                            RET
 MOVE_SNAKE ENDP
+
+MOVE_SNAKE_P2 PROC NEAR
+
+START_MOVE2:
+MOV AH,1
+INT 16h
+JZ LLL
+MOV AH,0
+INT 16h
+MOV value,ah
+;Check that Transmitter Holding Register is Empty
+mov dx , 3FDH ; Line Status Register
+AGAIN1: In al , dx ;Read Line Status
+test al , 00100000b
+JZ AGAIN1 ;Not empty (This line may need to change)
+;If empty put the VALUE in Transmit data register
+mov dx , 3F8H ; Transmit data register
+mov al,VALUE
+out dx , al
+LLL:
+
+; 18 SNAKE1_X
+; 18 SNAKE1_Y
+; 18 SNAKE2_X
+; 18 SNAKE2_Y
+; 4 LEN_ARR
+; 2 SCORE1
+; 2 SCORE2
+; 2 SECONDS
+; 2 MINS
+; 2 INDEX_FIRE
+; 2 INDEX_APPLE
+; 2 SNAKE1_HEAD_DIR
+; 2 SNAKE2_HEAD_DIR
+; DRAW SNAKE 1
+; DRAW SNAKE 2
+; DRAW APPLE
+; DRAW FIRE
+; DRAW TIME
+; DRAW SCORE
+
+
+
+
+RET
+MOVE_SNAKE_P2 ENDP
 END MAIN
