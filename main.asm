@@ -26,6 +26,11 @@ portinitialization MACRO
 ENDM portinitialization
 SEND MACRO
 LOCAL AGAIN 
+  MOV  CX,0000H
+ 	                            MOV  DX,0FFFFH
+ 	                            MOV  AH,86H
+	                            INT  15H
+	                          
 mov dx , 3FDH ; Line Status Register
 AGAIN: In al , dx ;Read Line Status
 test al , 00100000b
@@ -36,6 +41,18 @@ mov al,VALUE
 out dx , al
 RET
 ENDM SEND 
+RECEIVE MACRO
+LOCAL CHK2
+	;Check that Data is Ready
+mov dx , 3FDH ; Line Status Register
+CHK2: in al , dx
+test al , 1
+JZ CHK2 ;Not Ready (This line may need to change)
+;If Ready read the VALUE in Receive data register
+mov dx , 03F8H
+in al , dx
+mov VALUE , al
+ENDM RECEIVE
 .MODEL HUGE
 .STACK 128
 .DATA
@@ -2677,7 +2694,6 @@ CHECK_BITE PROC NEAR
 	                            MOV  BX,TEMP
 	                            MOV  AX, [SNAKE2_Y+BX]
 	                            MOV  BX,SNAKE1_Y[0]
-
 	                            CMP  AX,BX
 	                            JG   AX_IS_GREATER_Y
 	                            XCHG AX,BX
@@ -2927,206 +2943,435 @@ ONE_IS_FREEZED ENDP
 ; RET
 ; SEND ENDP
 SEND_DATA PROC NEAR
-mov value , 'A'
-SEND
+; mov value , 'A'
+; send
+
+mov value , 100
+send
+mov value , 00
+send
+mov value , 200
+send
+mov value , 00
+send
+mov value , 0eh
+send
+
+; mov value , 'A'
+; SEND
+; ; 18 SNAKE1_X
+; MOV CX , 18
+; MOV BX , 0
+; LS1:
+; MOV AL , BYTE PTR SNAKE1_X[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS1
+
+; mov value , 'B'
+; SEND
+; ; 18 SNAKE1_Y
+; MOV CX , 18
+; MOV BX , 0
+; LS2:
+; MOV AL , BYTE PTR SNAKE1_Y[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS2
+
+; mov value , 'C'
+; SEND
+
+; ; 18 SNAKE2_X
+; MOV CX , 18
+; MOV BX , 0
+; LS3:
+; MOV AL , BYTE PTR SNAKE2_X[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS3
+
+; mov value , 'D'
+; SEND
+; ; 18 SNAKE2_Y
+; MOV CX , 18
+; MOV BX , 0
+; LS4:
+; MOV AL , BYTE PTR SNAKE2_Y[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS4
+
+; mov value , 'E'
+; SEND
+
+; ; 4 LEN_ARR
+; MOV CX , 4
+; MOV BX , 0
+; LS5:
+; MOV AL , BYTE PTR SNAKE_LEN_ARR[BX]
+; MOV VALUE, BYTE PTR AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS5
+
+; mov value , 'F'
+; SEND
+; ; 2 SCORE1
+; MOV CX , 2
+; MOV BX , 0
+; LS6:
+; MOV AL , BYTE PTR PLAYER1_SCORE[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS6
+
+; mov value , 'G'
+; SEND
+
+; ; 2 SCORE2
+; MOV CX , 2
+; MOV BX , 0
+; LS7:
+; MOV AL , BYTE PTR PLAYER2_SCORE[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS7
+
+; mov value , 'H'
+; SEND
+
+; ; SECONDS
+; MOV AL , DISPLAYED_SECONDS
+; MOV VALUE, AL
+; SEND
+
+; mov value , 'I'
+; SEND
+; ;MINS
+; MOV AL , DISPLAYED_MINUTES
+; MOV VALUE, AL
+; SEND
+
+; mov value , 'J'
+; SEND
+
+; ; 2 INDEX_FIRE
+; MOV CX , 2
+; MOV BX , 0
+; LS8:
+; MOV AL , BYTE PTR CURR_FIRE_INDEX[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS8
+
+; mov value , 'K'
+; SEND
+; ; 2 INDEX_APPLE
+; MOV CX , 2
+; MOV BX , 0
+; LS9:
+; MOV AL , BYTE PTR CURR_APPLE_INDEX[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS9
+
+; mov value , 'L'
+; SEND
+; ; 2 SNAKE1_HEAD_DIR
+; MOV CX , 2
+; MOV BX , 0
+; LS10:
+; MOV AL , BYTE PTR SNAKE1_HEAD_DIRECTION[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS10
+
+; mov value , 'M'
+; SEND
+
+
+; ; 2 SNAKE2_HEAD_DIR
+; MOV CX , 2
+; MOV BX , 0
+; LS11:
+; MOV AL , BYTE PTR SNAKE2_HEAD_DIRECTION[BX]
+; MOV VALUE, AL
+; PUSH BX
+; PUSH CX
+; SEND
+; POP CX
+; POP BX 
+; INC BX
+; LOOP LS11
+RET
+SEND_DATA ENDP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+RECEIVE_DATA PROC NEAR
+RECEIVE
+RE1:
+CMP value , 'A'
+JNZ RE1
 ; 18 SNAKE1_X
 MOV CX , 18
 MOV BX , 0
-LS1:
-MOV AL , BYTE PTR SNAKE1_X[BX]
-MOV VALUE, AL
+LR1:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE1_X[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS1
+LOOP LR1
 
-mov value , 'B'
-SEND
+RECEIVE
+CMP value , 'B'
+JNZ RE1
 ; 18 SNAKE1_Y
 MOV CX , 18
 MOV BX , 0
-LS2:
-MOV AL , BYTE PTR SNAKE1_Y[BX]
-MOV VALUE, AL
+LR2:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE1_Y[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS2
+LOOP LR2
 
-mov value , 'C'
-SEND
+RECEIVE
+CMP value , 'C'
+JNZ RE1
 
 ; 18 SNAKE2_X
 MOV CX , 18
 MOV BX , 0
-LS3:
-MOV AL , BYTE PTR SNAKE2_X[BX]
-MOV VALUE, AL
+LR3:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE2_X[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS3
+LOOP LR3
 
-mov value , 'D'
-SEND
+RECEIVE
+CMP value , 'D'
+JNZ RE1
 ; 18 SNAKE2_Y
 MOV CX , 18
 MOV BX , 0
-LS4:
-MOV AL , BYTE PTR SNAKE2_Y[BX]
-MOV VALUE, AL
+LR4:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE2_Y[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS4
+LOOP LR4
 
-mov value , 'E'
-SEND
+RECEIVE
+CMP value , 'E'
+JNZ RE1
 
 ; 4 LEN_ARR
 MOV CX , 4
 MOV BX , 0
-LS5:
-MOV AL , BYTE PTR SNAKE_LEN_ARR[BX]
-MOV VALUE, BYTE PTR AL
+LR5:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE_LEN_ARR[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS5
+LOOP LR5
 
-mov value , 'F'
-SEND
+RECEIVE
+CMP value , 'F'
+JNZ RE1
 ; 2 SCORE1
 MOV CX , 2
 MOV BX , 0
-LS6:
-MOV AL , BYTE PTR PLAYER1_SCORE[BX]
-MOV VALUE, AL
+LR6:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR PLAYER1_SCORE[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS6
+LOOP LR6
 
-mov value , 'G'
-SEND
+RECEIVE
+CMP value , 'G'
+JNZ RE1
 
 ; 2 SCORE2
 MOV CX , 2
 MOV BX , 0
-LS7:
-MOV AL , BYTE PTR PLAYER2_SCORE[BX]
-MOV VALUE, AL
+LR7:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR PLAYER2_SCORE[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS7
+LOOP LR7
 
-mov value , 'H'
-SEND
+RECEIVE
+CMP value , 'H'
+JNZ RE1
 
 ; SECONDS
-MOV AL , DISPLAYED_SECONDS
+RECEIVE
 MOV VALUE, AL
-SEND
+MOV DISPLAYED_SECONDS , AL
 
-mov value , 'I'
-SEND
+RECEIVE
+CMP value , 'I'
+JZ RE1
 ;MINS
-MOV AL , DISPLAYED_MINUTES
-MOV VALUE, AL
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV DISPLAYED_MINUTES  ,AL
 
-mov value , 'J'
-SEND
+RECEIVE
+CMP value , 'J'
+JNZ RE1
 
 ; 2 INDEX_FIRE
 MOV CX , 2
 MOV BX , 0
-LS8:
-MOV AL , BYTE PTR CURR_FIRE_INDEX[BX]
-MOV VALUE, AL
+LR8:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR CURR_FIRE_INDEX[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS8
+LOOP LR8
 
-mov value , 'K'
-SEND
+RECEIVE
+CMP value , 'K'
+JNZ RE1
 ; 2 INDEX_APPLE
 MOV CX , 2
 MOV BX , 0
-LS9:
-MOV AL , BYTE PTR CURR_APPLE_INDEX[BX]
-MOV VALUE, AL
+LR9:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR CURR_APPLE_INDEX[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS9
+LOOP LR9
 
-mov value , 'L'
-SEND
+RECEIVE
+CMP value , 'L'
+JNZ RE1
 ; 2 SNAKE1_HEAD_DIR
 MOV CX , 2
 MOV BX , 0
-LS10:
-MOV AL , BYTE PTR SNAKE1_HEAD_DIRECTION[BX]
-MOV VALUE, AL
+LR10:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE1_HEAD_DIRECTION[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS10
+LOOP LR10
 
-mov value , 'M'
-SEND
+RECEIVE
+CMP value , 'M'
+JNZ RE1
 
 
 ; 2 SNAKE2_HEAD_DIR
 MOV CX , 2
 MOV BX , 0
-LS11:
-MOV AL , BYTE PTR SNAKE2_HEAD_DIRECTION[BX]
-MOV VALUE, AL
+LR11:
 PUSH BX
 PUSH CX
-SEND
+RECEIVE
+MOV AL , VALUE
+MOV BYTE PTR SNAKE2_HEAD_DIRECTION[BX] , AL
 POP CX
 POP BX 
 INC BX
-LOOP LS11
+LOOP LR11
 RET
-SEND_DATA ENDP
-MOVE_SNAKE PROC NEAR
+RECEIVE_DATA ENDP
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+MOVE_SNAKE PROC NEAR
 
 	START:                      
 	                         	BEG:
@@ -3193,7 +3438,8 @@ CALL SEND_DATA
 	                            CALL TWO_IS_FREEZED
 	                            CALL DRAW_SNAKES
 	                            
-	                            
+	                            CMP  END_OF_THE_GAME,0
+	                            JNZ  RETURN_TO_MAIN_HELP_HELP
 								
 
 	                            CMP  NUM_C_EAT_SNAKE1 , 3
@@ -3204,8 +3450,7 @@ CALL SEND_DATA
 	                            MOV  DX, POWER_UP1_PENALITY
 	                            MOV  SNAKE1_FREEZE,DX
 	                            JMP  END_OF_FREEZE_CHECKING
-								CMP  END_OF_THE_GAME,0
-	                            JNZ  RETURN_TO_MAIN_HELP_HELP
+								
 	FREEZE_SNAKE2:              
 	                            MOV  NUM_C_EAT_SNAKE1,0
 	                            MOV  DX, POWER_UP1_PENALITY
@@ -3213,10 +3458,10 @@ CALL SEND_DATA
 	END_OF_FREEZE_CHECKING:     
 
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;DELAY MACRO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	                            ; MOV  CX,0000H
-	                            ; MOV  DX,000FH
-	                            ; MOV  AH,86H
-	                            ; INT  15H
+	                            MOV  CX,0000H
+	                            MOV  DX,0FFFFH
+	                            MOV  AH,86H
+	                            INT  15H
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -3471,7 +3716,22 @@ mov dx , 3F8H ; Transmit data register
 mov al,VALUE
 out dx , al
 LLL:
+CALL RECEIVE_DATA
 
+
+
+
+
+								CALL Print_time
+	                            CALL DRAW_APPLE
+	                            CALL DRAW_FIRE
+
+	                            CALL print_score_player1
+	                            CALL print_score_player2
+
+	                            CALL DRAW_SNAKES
+
+JMP START_MOVE2
 ; 18 SNAKE1_X
 ; 18 SNAKE1_Y
 ; 18 SNAKE2_X
