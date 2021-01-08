@@ -6,7 +6,7 @@ portinitialization MACRO
 
   ;Set LSB byte of the Baud Rate Divisor Latch register.
 	mov dx, 3f8h			
-	mov al, 0ch			
+	mov al, 1		
 	out dx, al
 
   ;Set MSB byte of the Baud Rate Divisor Latch register.
@@ -26,10 +26,7 @@ portinitialization MACRO
 ENDM portinitialization
 SEND MACRO
 LOCAL AGAIN 
-  MOV  CX,0000H
- 	                            MOV  DX,0FFFFH
- 	                            MOV  AH,86H
-	                            INT  15H
+ 
 	                          
 mov dx , 3FDH ; Line Status Register
 AGAIN: In al , dx ;Read Line Status
@@ -39,7 +36,6 @@ JZ AGAIN ;Not empty (This line may need to change)
 mov dx , 3F8H ; Transmit data register
 mov al,VALUE
 out dx , al
-RET
 ENDM SEND 
 RECEIVE MACRO
 LOCAL CHK2
@@ -599,6 +595,7 @@ VALUE DB ?
 	equlity                db  "THE TWO PLAYERS TIED $"
 	snake_text             db  "SNAKE RIVALS $"
 	player_num             db  ?
+	to_send                db  100
 .CODE
 MAIN PROC FAR
 	                    MOV  AX,@DATA
@@ -2943,19 +2940,214 @@ ONE_IS_FREEZED ENDP
 ; RET
 ; SEND ENDP
 SEND_DATA PROC NEAR
-; mov value , 'A'
-; send
+  mov     value , 'A'
+	                            SEND
+	; 18 SNAKE1_X
+	                            MOV     CX , 18
+	                            MOV     BX , 0
+	LS1:                        
+	                            MOV     AL , BYTE PTR SNAKE1_X[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS1
 
-mov value , 100
-send
-mov value , 00
-send
-mov value , 200
-send
-mov value , 00
-send
-mov value , 0eh
-send
+	                            ; mov     value , 'B'
+	                            ; SEND
+	; 18 SNAKE1_Y
+	                            MOV     CX , 18
+	                            MOV     BX , 0
+	LS2:                        
+	                            MOV     AL , BYTE PTR SNAKE1_Y[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS2
+
+	                            ; mov     value , 'C'
+	                            ; SEND
+
+	; 18 SNAKE2_X
+	                            MOV     CX , 18
+	                            MOV     BX , 0
+	LS3:                        
+	                            MOV     AL , BYTE PTR SNAKE2_X[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS3
+
+	                            ; mov     value , 'D'
+	                            ; SEND
+	; 18 SNAKE2_Y
+	                            MOV     CX , 18
+	                            MOV     BX , 0
+	LS4:                        
+	                            MOV     AL , BYTE PTR SNAKE2_Y[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS4
+
+	                            ; mov     value , 'E'
+	                            ; SEND
+
+	; 4 LEN_ARR
+	                            MOV     CX , 4
+	                            MOV     BX , 0
+	LS5:                        
+	                            MOV     AL , BYTE PTR SNAKE_LEN_ARR[BX]
+	                            MOV     VALUE, BYTE PTR AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS5
+
+	                            ; mov     value , 'F'
+	                            ; SEND
+	; 2 SCORE1
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS6:                        
+	                            MOV     AL , BYTE PTR PLAYER1_SCORE[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS6
+
+	                            ; mov     value , 'G'
+	                            ; SEND
+
+	; 2 SCORE2
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS7:                        
+	                            MOV     AL , BYTE PTR PLAYER2_SCORE[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS7
+
+	                            ; mov     value , 'H'
+	                            ; SEND
+
+	; SECONDS
+	                            MOV     AL , DISPLAYED_SECONDS
+	                            MOV     VALUE, AL
+	                            SEND
+
+	                            ; mov     value , 'I'
+	                            ; SEND
+	;MINS
+	                            MOV     AL , DISPLAYED_MINUTES
+	                            MOV     VALUE, AL
+	                            SEND
+
+	                            ; mov     value , 'J'
+	                            ; SEND
+
+	; 2 INDEX_FIRE
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS8:                        
+	                            MOV     AL , BYTE PTR CURR_FIRE_INDEX[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS8
+
+	                            ; mov     value , 'K'
+	                            ; SEND
+	; 2 INDEX_APPLE
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS9:                        
+	                            MOV     AL , BYTE PTR CURR_APPLE_INDEX[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS9
+
+	                            ; mov     value , 'L'
+	                            ; SEND
+	; 2 SNAKE1_HEAD_DIR
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS10:                       
+	                            MOV     AL , BYTE PTR SNAKE1_HEAD_DIRECTION[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS10
+
+	                            ; mov     value , 'M'
+	                            ; SEND
+
+
+	; 2 SNAKE2_HEAD_DIR
+	                            MOV     CX , 2
+	                            MOV     BX , 0
+	LS11:                       
+	                            MOV     AL , BYTE PTR SNAKE2_HEAD_DIRECTION[BX]
+	                            MOV     VALUE, AL
+	                            PUSH    BX
+	                            PUSH    CX
+	                            SEND
+	                            POP     CX
+	                            POP     BX
+	                            INC     BX
+	                            LOOP    LS11
+	                            RET
+; mov al , 20h
+; mov value , al
+; send
+; mov value , 10h
+; send
+; mov value , 15h
+; send
+; mov value , 00h
+; send
+; mov value , 0eh
+; send
 
 ; mov value , 'A'
 ; SEND
@@ -3175,9 +3367,9 @@ POP BX
 INC BX
 LOOP LR1
 
-RECEIVE
-CMP value , 'B'
-JNZ RE1
+; RECEIVE
+; CMP value , 'B'
+; JNZ RE1
 ; 18 SNAKE1_Y
 MOV CX , 18
 MOV BX , 0
@@ -3192,9 +3384,9 @@ POP BX
 INC BX
 LOOP LR2
 
-RECEIVE
-CMP value , 'C'
-JNZ RE1
+; RECEIVE
+; CMP value , 'C'
+; JNZ RE1
 
 ; 18 SNAKE2_X
 MOV CX , 18
@@ -3210,9 +3402,9 @@ POP BX
 INC BX
 LOOP LR3
 
-RECEIVE
-CMP value , 'D'
-JNZ RE1
+; RECEIVE
+; CMP value , 'D'
+; JNZ RE1
 ; 18 SNAKE2_Y
 MOV CX , 18
 MOV BX , 0
@@ -3227,9 +3419,9 @@ POP BX
 INC BX
 LOOP LR4
 
-RECEIVE
-CMP value , 'E'
-JNZ RE1
+; RECEIVE
+; CMP value , 'E'
+; JNZ RE1
 
 ; 4 LEN_ARR
 MOV CX , 4
@@ -3245,9 +3437,9 @@ POP BX
 INC BX
 LOOP LR5
 
-RECEIVE
-CMP value , 'F'
-JNZ RE1
+; RECEIVE
+; CMP value , 'F'
+; JNZ RE1
 ; 2 SCORE1
 MOV CX , 2
 MOV BX , 0
@@ -3262,9 +3454,9 @@ POP BX
 INC BX
 LOOP LR6
 
-RECEIVE
-CMP value , 'G'
-JNZ RE1
+; RECEIVE
+; CMP value , 'G'
+; JNZ RE1
 
 ; 2 SCORE2
 MOV CX , 2
@@ -3280,26 +3472,26 @@ POP BX
 INC BX
 LOOP LR7
 
-RECEIVE
-CMP value , 'H'
-JNZ RE1
+; RECEIVE
+; CMP value , 'H'
+; JNZ RE1
 
 ; SECONDS
 RECEIVE
 MOV VALUE, AL
 MOV DISPLAYED_SECONDS , AL
 
-RECEIVE
-CMP value , 'I'
-JZ RE1
+; RECEIVE
+; CMP value , 'I'
+; JZ RE1
 ;MINS
 RECEIVE
 MOV AL , VALUE
 MOV DISPLAYED_MINUTES  ,AL
 
-RECEIVE
-CMP value , 'J'
-JNZ RE1
+; RECEIVE
+; CMP value , 'J'
+; JNZ RE1
 
 ; 2 INDEX_FIRE
 MOV CX , 2
@@ -3315,9 +3507,9 @@ POP BX
 INC BX
 LOOP LR8
 
-RECEIVE
-CMP value , 'K'
-JNZ RE1
+; RECEIVE
+; CMP value , 'K'
+; JNZ RE1
 ; 2 INDEX_APPLE
 MOV CX , 2
 MOV BX , 0
@@ -3332,9 +3524,9 @@ POP BX
 INC BX
 LOOP LR9
 
-RECEIVE
-CMP value , 'L'
-JNZ RE1
+; RECEIVE
+; CMP value , 'L'
+; JNZ RE1
 ; 2 SNAKE1_HEAD_DIR
 MOV CX , 2
 MOV BX , 0
@@ -3349,9 +3541,9 @@ POP BX
 INC BX
 LOOP LR10
 
-RECEIVE
-CMP value , 'M'
-JNZ RE1
+; RECEIVE
+; CMP value , 'M'
+; JNZ RE1
 
 
 ; 2 SNAKE2_HEAD_DIR
@@ -3423,8 +3615,10 @@ MOVE_SNAKE PROC NEAR
 	                            JMP  SNAKE_1
 
 NEW_START:  
-CALL SEND_DATA
 
+CALL SEND_DATA
+mov bl , 1
+add to_send , bl
 
 	                            CALL Print_time
 	                            CALL DRAW_APPLE
@@ -3700,61 +3894,66 @@ MOVE_SNAKE ENDP
 MOVE_SNAKE_P2 PROC NEAR
 
 START_MOVE2:
-MOV AH,1
-INT 16h
-JZ LLL
-MOV AH,0
-INT 16h
-MOV value,ah
-;Check that Transmitter Holding Register is Empty
-mov dx , 3FDH ; Line Status Register
-AGAIN1: In al , dx ;Read Line Status
-test al , 00100000b
-JZ AGAIN1 ;Not empty (This line may need to change)
-;If empty put the VALUE in Transmit data register
-mov dx , 3F8H ; Transmit data register
-mov al,VALUE
-out dx , al
-LLL:
-CALL RECEIVE_DATA
+           MOV     AH,1
+	                            INT     16h
+	                            JZ      LLL
+	                            MOV     AH,0
+	                            INT     16h
+	                            MOV     value,ah
+	;Check that Transmitter Holding Register is Empty
+	                            mov     dx , 3FDH                                             	; Line Status Register
+	AGAIN1:                     In      al , dx                                               	;Read Line Status
+	                            test    al , 00100000b
+	                            JZ      AGAIN1                                                	;Not empty (This line may need to change)
+	;If empty put the VALUE in Transmit data register
+	                            mov     dx , 3F8H                                             	; Transmit data register
+	                            mov     al,VALUE
+	                            out     dx , al
+	LLL:                        
+
+;call delete_snakes
+	                            call    RECEIVE_DATA
+	                            ; mov     bx , init_square_y
+								; mov     dx , init_square_x
+	                            ; mov    player1_score , bx
+
+	                            ; mov     ah , temp_color
+	                            ; call    DRAW_SQUARE
+	                            CALL    Print_time
+	                            CALL    DRAW_APPLE
+	                            CALL    DRAW_FIRE
+
+	                            CALL    print_score_player1
+	                            CALL    print_score_player2
+
+	                            CALL    DRAW_SNAKES
+								
+
+
+	                            JMP     START_MOVE2
+	; 18 SNAKE1_X
+	; 18 SNAKE1_Y
+	; 18 SNAKE2_X
+	; 18 SNAKE2_Y
+	; 4 LEN_ARR
+	; 2 SCORE1
+	; 2 SCORE2
+	; 2 SECONDS
+	; 2 MINS
+	; 2 INDEX_FIRE
+	; 2 INDEX_APPLE
+	; 2 SNAKE1_HEAD_DIR
+	; 2 SNAKE2_HEAD_DIR
+	; DRAW SNAKE 1
+	; DRAW SNAKE 2
+	; DRAW APPLE
+	; DRAW FIRE
+	; DRAW TIME
+	; DRAW SCORE
 
 
 
 
-
-								CALL Print_time
-	                            CALL DRAW_APPLE
-	                            CALL DRAW_FIRE
-
-	                            CALL print_score_player1
-	                            CALL print_score_player2
-
-	                            CALL DRAW_SNAKES
-
-JMP START_MOVE2
-; 18 SNAKE1_X
-; 18 SNAKE1_Y
-; 18 SNAKE2_X
-; 18 SNAKE2_Y
-; 4 LEN_ARR
-; 2 SCORE1
-; 2 SCORE2
-; 2 SECONDS
-; 2 MINS
-; 2 INDEX_FIRE
-; 2 INDEX_APPLE
-; 2 SNAKE1_HEAD_DIR
-; 2 SNAKE2_HEAD_DIR
-; DRAW SNAKE 1
-; DRAW SNAKE 2
-; DRAW APPLE
-; DRAW FIRE
-; DRAW TIME
-; DRAW SCORE
-
-
-
-
-RET
+	                            RET
 MOVE_SNAKE_P2 ENDP
 END MAIN
