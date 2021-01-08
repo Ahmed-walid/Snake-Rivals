@@ -3136,6 +3136,46 @@ SEND_DATA PROC NEAR
 	                            POP     BX
 	                            INC     BX
 	                            LOOP    LS11
+								
+								
+								MOV     CX , 2
+	                            MOV     BX , 0
+	LS12:                       
+	                            MOV     AL , BYTE PTR END_OF_THE_GAME[BX]
+	                           MOV     VALUE, AL
+	                           PUSH    BX
+                           PUSH    CX
+	                             SEND
+	                          POP     CX
+	                             POP     BX
+	                             INC     BX
+	                             LOOP    LS12
+MOV     CX , 2
+MOV     BX , 0
+LS13:                       
+	                            MOV     AL , BYTE PTR SNAKE1_FREEZE[BX]
+	                           MOV     VALUE, AL
+	                           PUSH    BX
+                           PUSH    CX
+	                             SEND
+	                          POP     CX
+	                             POP     BX
+	                             INC     BX
+	                             LOOP    LS13
+
+MOV     CX , 2
+MOV     BX , 0
+LS14:                       
+	                            MOV     AL , BYTE PTR SNAKE2_FREEZE[BX]
+	                           MOV     VALUE, AL
+	                           PUSH    BX
+                           PUSH    CX
+	                             SEND
+	                          POP     CX
+	                             POP     BX
+	                             INC     BX
+	                             LOOP    LS14
+
 	                            RET
 ; mov al , 20h
 ; mov value , al
@@ -3345,7 +3385,7 @@ SEND_DATA PROC NEAR
 ; POP BX 
 ; INC BX
 ; LOOP LS11
-RET
+
 SEND_DATA ENDP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RECEIVE_DATA PROC NEAR
@@ -3559,6 +3599,7 @@ POP CX
 POP BX 
 INC BX
 LOOP LR11
+
 RET
 RECEIVE_DATA ENDP
 
@@ -3616,9 +3657,9 @@ MOVE_SNAKE PROC NEAR
 
 NEW_START:  
 
-CALL SEND_DATA
-mov bl , 1
-add to_send , bl
+; CALL SEND_DATA
+; mov bl , 1
+; add to_send , bl
 
 	                            CALL Print_time
 	                            CALL DRAW_APPLE
@@ -3631,7 +3672,7 @@ add to_send , bl
 	                            CALL ONE_IS_FREEZED
 	                            CALL TWO_IS_FREEZED
 	                            CALL DRAW_SNAKES
-	                            
+	                            CALL SEND_DATA
 	                            CMP  END_OF_THE_GAME,0
 	                            JNZ  RETURN_TO_MAIN_HELP_HELP
 								
