@@ -1,4 +1,4 @@
-# Snake-Rivals
+# Snake Rivals
 ## X86-Assembly Game
 ```
 2-players game where each player aims to get the maximum score in a specific time.
